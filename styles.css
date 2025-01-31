@@ -28,7 +28,7 @@ header {
     top: 50%;
     border: 2px solid white;
     transform: translateY(-50%);
-    width: 40px;
+    width: 25px;
     height: auto;
 }
 
@@ -122,6 +122,37 @@ img {
 }
 
 .bio-image img {
-    width: 100%;
+    width: 60%;
     height: auto;
+}
+
+/* Video Background */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.video-background iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120vw;
+    height: 120vh;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+/* Text Container */
+.text-container {
+    background-color: rgba(50, 50, 50, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: fit-content;
+    margin: auto;
 }
