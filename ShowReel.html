@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotHome</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+    	<div class="header-content">
+        	<img src="ALogo.jpg" alt="Anneke Dempsey" class="logo">
+        	<h2>Showreels</h2>
+    	</div>
+    </header>
+
+   <nav>
+        <a href="index.html">Home</a>
+	<a href="production-design.html">Production Design</a>
+        <a href="art-director.html">Art Director</a>
+       	<a href="art-department.html">Art Department</a>
+        <a href="ShowReel.html">ShowReel</a>
+       	<a href="work-history.html">Work History</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    <div class="video-background">
+        <iframe src="https://www.youtube.com/embed/aNkwvUm4NHw?autoplay=1&mute=1&loop=1&playlist=aNkwvUm4NHw&controls=0&showinfo=0&modestbranding=1" 
+                frameborder="0" 
+                allow="autoplay; fullscreen" 
+                allowfullscreen>
+        </iframe>
+    </div>
+
+    <div class="media-section">
+        <div style="width: 60%; margin: 0 auto;">
+        <iframe id="main-video" width="100%" height="650" frameborder="0" allowfullscreen src="https://www.youtube.com/embed/WdrChCO1NZQ?autoplay=1">
+
+        </iframe>
+
+  <div style="display: flex; overflow-x: auto; margin-top: 20px;">
+    <!-- Example of a single video link in the carousel -->
+    <div style="flex: 0 0 auto; margin-right: 10px;">
+        <img 
+          src="../images/Ellen8.png" 
+          alt="Ellen" 
+          style="cursor: pointer; width: 300px;" 
+          onclick="playVideo('https://www.youtube.com/embed/WdrChCO1NZQ')">
+
+
+    </div>
+    <div style="flex: 0 0 auto; margin-right: 10px;">
+      <img 
+        src="../images/Dogs1.jpg" 
+        alt="Dogs" 
+        style="cursor: pointer; width: 300px;" 
+        onclick="playVideo('https://www.youtube.com/embed/bbzef52HNM0')">
+
+
+    </div>
+    <div style="flex: 0 0 auto; margin-right: 10px;">
+      <img 
+        src="../images/Hartklop3.png" 
+        alt="Hartklop" 
+        style="cursor: pointer; width: 300px;" 
+        onclick="playVideo('https://www.youtube.com/embed/a-VrYHeJjTk')">
+
+
+    </div>
+    <div style="flex: 0 0 auto; margin-right: 10px;">
+      <img 
+        src="../images/IamAllGirls5.png" 
+        alt="IamAllGirls" 
+        style="cursor: pointer; width: 300px;" 
+        onclick="playVideo('https://www.youtube.com/embed/0Z1GYKaZoyg')">
+
+
+    </div>
+    <div style="flex: 0 0 auto; margin-right: 10px;">
+      <img 
+        src="../images/iNumber7.png" 
+        alt="iNumber7" 
+        style="cursor: pointer; width: 300px;" 
+        onclick="playVideo('https://www.youtube.com/embed/OYJECgPbrNA')">
+
+    </div>
+    <div style="flex: 0 0 auto; margin-right: 10px;">
+        <img 
+
+          src="../images/Matilda6.png" 
+          alt="Matilda" 
+          style="cursor: pointer; width: 300px;" 
+          onclick="playVideo('https://www.youtube.com/embed/5GroWAOn8h8')">
+
+    </div> 
+    <div style="flex: 0 0 auto; margin-right: 10px;">
+        <img 
+          src="../images/Legacy4.jpg" 
+          alt="LEGACY 2" 
+          style="cursor: pointer; width: 300px;" 
+          onclick="playVideo('https://www.youtube.com/embed/5GroWAOn8h8')">
+    </div>
+   
+    <!-- Add more videos as needed -->
+  </div>
+</div>
+
+<main>
+    <div class="text-container">
+        <div class="bio-text">
+            <h1>Contact me</h1>
+            <p>I would love to hear from you. Contact me via the following details.</p> 
+            <ul>
+                <li> Call me: <a href="tel:+1234567890">+1 234 567 890</a></li>
+                <li> Email: <a href="mailto:AnnekeDempsey@gmail.com">AnnekeDempsey@gmail.com</a></li>
+                <li> <a href="https://www.imdb.com/name/nm5536255/?ref_=nmbio_ov" target="_blank" rel="noopener">imdb.com</a></li>
+                <li> <a href="https://www.instagram.com/anneke_dempsey?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">instagram.com</a></li>
+            </ul>
+        </div>
+        
+    </div>
+</main>
+
+
+<script>
+  function playVideo(videoUrl) {
+    const videoFrame = document.getElementById('main-video');
+    
+    // Update the iframe src to load the YouTube video
+    videoFrame.src = videoUrl + "?autoplay=1&mute=1";
+  }
+</script>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Anneke Dempsey. All rights reserved.</p>
+    </footer>
+</body>
+</html>
