@@ -1,29 +1,174 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NotHome</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+	header {
+    		background-color: #333;
+    		color: white;
+    		padding: .5rem 0;
+	}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    left: 1rem; /* Adjust as needed */
+    top: 50%;
+	border: 2px solid white;
+    transform: translateY(-50%);
+    width: 25px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */}
+
+
+h2 {
+    text-align: center;
+    margin: 0;
+    flex-grow: 1;
+}
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: .05rem 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        .text-section {
+            flex: 1; /* Left third */
+            padding: 20px;
+        }
+        .media-section {
+            flex: 2; /* Right two thirds */
+            padding: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+	.video-container {
+            width: 80%; /* Set container width to 80% */
+            margin: auto; /* Center the container */
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+
+        .video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.video-background iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120vw;
+    height: 120vh;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+.bio-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bio-text {
+    width: 66%;
+    padding: 20px;
+}
+
+.bio-image {
+    width: 33%;
+}
+
+.bio-image img {
+    width: 60%;
+    height: auto;
+}
+.text-container {
+    background-color: rgba(50, 50, 50, 0.8); /* Dark grey with slight transparency */
+    color: white; /* Ensure text is readable */
+    padding: 20px; /* Add spacing inside */
+    border-radius: 5px; /* Optional rounded corners */
+    width: fit-content; /* Adjust to content width */
+    margin: auto; /* Center horizontally */
+}
+
+    </style>
 </head>
 <body>
     <header>
     	<div class="header-content">
         	<img src="ALogo.jpg" alt="Anneke Dempsey" class="logo">
-        	<h2>Showreels</h2>
+        	<h2>Showreel</h2>
     	</div>
     </header>
 
    <nav>
-        <a href="index.html">Home</a>
-	<a href="production-design.html">Production Design</a>
-        <a href="art-director.html">Art Director</a>
-       	<a href="art-department.html">Art Department</a>
-        <a href="ShowReel.html">ShowReel</a>
-       	<a href="work-history.html">Work History1</a>
+        <a href="../index.html">Home</a>
+	<a href="../production-design.html">Production Design</a>
+        <a href="../art-director.html">Art Director</a>
+       	<a href="../art-department.html">Art Department</a>
+
+       	<a href="work-history.html">Work History2</a>
         <a href="contact.html">Contact</a>
     </nav>
-
     <div class="video-background">
         <iframe src="https://www.youtube.com/embed/aNkwvUm4NHw?autoplay=1&mute=1&loop=1&playlist=aNkwvUm4NHw&controls=0&showinfo=0&modestbranding=1" 
                 frameborder="0" 
@@ -42,7 +187,7 @@
     <!-- Example of a single video link in the carousel -->
     <div style="flex: 0 0 auto; margin-right: 10px;">
         <img 
-          src="./images/Dogs1.png" 
+          src="../images/Ellen8.png" 
           alt="Ellen" 
           style="cursor: pointer; width: 300px;" 
           onclick="playVideo('https://www.youtube.com/embed/WdrChCO1NZQ')">
