@@ -8,25 +8,12 @@ body {
     overflow-x: hidden;
 }
 
-/* Header (Fixed Navigation) */
+/* Header */
 header {
     background-color: #333;
     padding: 10px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* Keep it above other elements */
 }
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 5px;
-    position: relative;
-    width: 100%;
-}
-/* Header Content */
+
 .header-content {
     display: flex;
     align-items: center;
@@ -62,17 +49,22 @@ nav a:hover {
     background-color: #555;
 }
 
-/* Video Section (Fullscreen Background Below Nav) */
-.video-section {
-    position: fixed;
-    top: 100px; /* Push video below the fixed navigation */
-    left: 0;
-    width: 100vw;
-    height: calc(100vh - 60px); /* Reduce height to account for the fixed nav */
-    z-index: -1; /* Keep it behind other content */
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
 }
 
-/* Video Background */
+/* Video Section */
+.video-section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
 .video-background iframe {
     position: absolute;
     top: 50%;
@@ -80,6 +72,7 @@ nav a:hover {
     width: 120vw;
     height: 120vh;
     transform: translate(-50%, -50%);
+    pointer-events: none;
 }
 
 /* Overlay Text */
@@ -95,32 +88,24 @@ nav a:hover {
     z-index: 1;
 }
 
-/* Gallery Container */
+/* Scroller Styles */
 .gallery-container {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    padding: 50px 0;
     position: relative;
-    z-index: 1; /* Ensure it's above the video */
-    margin-top: calc(100vh - 60px); /* Push gallery below the video */
-    background: transparent; /* Keep background transparent */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
 }
 
-/* Gallery Wrapper */
 .gallery-wrapper {
-    display: flex;
-    justify-content: center;
+    width: calc(200px * 3 + (2 * 2px));
     overflow: hidden;
-    max-width: 80%;
 }
 
-/* Gallery Images */
 .gallery-images {
     display: flex;
     gap: 2px;
     transition: transform 0.5s ease-in-out;
-    justify-content: center;
 }
 
 .gallery-images a {

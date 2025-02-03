@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anneke Dempsey</title>
+    
+	<!-- Link to external stylesheet -->
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<!-- Header -->
+	<header>
+		<div class="header-content">
+			<img src="ALogo1.jpg" alt="Anneke Dempsey" class="logo">
+			<nav>
+				<a href="index.html">Home</a>
+				<a href="ShowReel.html">Showreel</a>
+				<a href="contact.html">Contact</a>
+				<a href="work-history.html">Work History</a>
+			</nav>
+		</div>
+	</header>
+
+	<!-- Video Section -->
+	<div class="video-section">
+		<div class="video-background">
+			<iframe src="https://www.youtube.com/embed/aNkwvUm4NHw?autoplay=1&mute=1&loop=1&playlist=aNkwvUm4NHw&controls=0&showinfo=0&modestbranding=1" 
+					frameborder="0" 
+					allow="autoplay" 
+					allowfullscreen>
+			</iframe>
+		</div>
+		<div class="overlay-text">FILM<br>TELEVISION</div> 
+	</div>
+
+	<!-- Scroller Section -->
+	<div class="gallery-container">
+        <button class="scroll-button left">&lt;</button>
+        <div class="gallery-wrapper">
+            <div class="gallery-images">
+                <!-- Example images -->
+                <a href="#"><img src="./images/Dogs1.jpg" alt="Image1"></a>
+                <a href="#"><img src="./images/Ellen8.png" alt="Image2"></a>
+                <a href="#"><img src="./images/Hartklop3.png" alt="Image3"></a>
+                <a href="#"><img src="./images/IamAllGirls5.png" alt="Image4"></a>
+                <a href="#"><img src="./images/iNumber7.png" alt="Image5"></a>
+                <a href="#"><img src="./images/Landing.jpg" alt="Image6"></a>
+             </div>
+         </div>
+         <button class="scroll-button right">&gt;</button>
+     </div>
+
+     <!-- Footer -->
+     <footer>
+         <p>&copy; 2025 Anneke Dempsey. All rights reserved.</p>
+     </footer>
+
+     <!-- JavaScript -->
+     <script>
+        const leftButton = document.querySelector('.left');
+        const rightButton = document.querySelector('.right');
+        const galleryImages = document.querySelector('.gallery-images');
+        const images = document.querySelectorAll('.gallery-images a');
+        
+        const imageWidth = 200; // Image width in pixels
+        const gap = 2; // Gap between images in pixels
+        let currentPosition = 0; // Current position in the gallery
+        const visibleImages = 3; // Number of images visible at a time
+
+        function updateButtons() {
+            leftButton.style.visibility = currentPosition === 0 ? 'hidden' : 'visible';
+            rightButton.style.visibility = 
+                currentPosition >= images.length - visibleImages ? 'hidden' : 'visible';
+        }
+
+        function scrollGallery(direction) {
+            const maxPosition = images.length - visibleImages; // Maximum position based on total images
+            currentPosition = Math.max(0, Math.min(maxPosition, currentPosition + direction));
+            
+            galleryImages.style.transform = `translateX(-${currentPosition * (imageWidth + gap)}px)`;
+            
+            updateButtons(); // Update button visibility
+        }
+
+        leftButton.addEventListener('click', () => scrollGallery(-1));
+        rightButton.addEventListener('click', () => scrollGallery(1));
+        
+        updateButtons();
+     </script>
+
+</body>
+</html>

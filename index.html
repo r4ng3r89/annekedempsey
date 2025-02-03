@@ -5,65 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anneke Dempsey</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            background-color: black;
-            color: white;
-            overflow-x: hidden;
-        }
-        .video-section {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-        }
-        .video-background iframe {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 120vw;
-            height: 120vh;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-        }
-        .fullscreen-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 3rem;
-            font-weight: bold;
-            text-align: center;
-            z-index: 1;
-        }
-        .gallery-container {
-            display: flex;
-            width: 100vw;
-            height: auto;
-            padding: 50px 0;
-        }
-        .gallery-column {
-            flex: 1;
-            padding: 10px;
-            text-align: center;
-        }
-        .gallery-column h1 {
-            color: lightgray;
-        }
-        .gallery-images {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-        .gallery-images img {
-            width: 45%;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <div class="header-content">
             <img src="ALogo1.jpg" alt="Anneke Dempsey" class="logo">
@@ -76,6 +20,7 @@
         </div>
     </header>
 
+    <!-- Video Section -->
     <div class="video-section">
         <div class="video-background">
             <iframe src="https://www.youtube.com/embed/aNkwvUm4NHw?autoplay=1&mute=1&loop=1&playlist=aNkwvUm4NHw&controls=0&showinfo=0&modestbranding=1" 
@@ -84,59 +29,78 @@
                     allowfullscreen>
             </iframe>
         </div>
-        <div class="overlay-text">FILM<P><br>TELEVISION</P>
-        </div> 
- 
+        <div class="overlay-text"><p>FILM<p>TELEVISION</p></div> 
     </div>
-    <a href="ShowReel.html">
+
+    <!-- Scroller Section -->
     <div class="gallery-container">
-        <!-- FILM Section -->
-        <div class="gallery-column">
-            <h1>&nbsp;</h1>
+        <button class="scroll-button left">&lt;</button>
+        <div class="gallery-wrapper">
             <div class="gallery-images">
-                <img src="./images/Ellen8.png" alt="Ellen">
-                <img src="./images/Dogs1.jpg" alt="Dogs">
+                <a href="ShowReel.html"><img src="./images/Dogs1.jpg" alt="Image1"></a>
+                <a href="ShowReel.html"><img src="./images/Ellen8.png" alt="Image2"></a>
+                <a href="ShowReel.html"><img src="./images/Hartklop3.png" alt="Image3"></a>
+                <a href="ShowReel.html"><img src="./images/IamAllGirls5.png" alt="Image4"></a>
+                <a href="ShowReel.html"><img src="./images/iNumber7.png" alt="Image5"></a>
+                <a href="ShowReel.html"><img src="./images/Legacy4.jpg" alt="Image8"></a>
+                <a href="ShowReel.html"><img src="./images/Matilda6.png" alt="Image9"></a>
+                <a href="ShowReel.html"><img src="./images/SomvanTwee2.png" alt="Image10"></a>
+                <a href="ShowReel.html"><img src="./images/work-history1.jpg" alt="Image11"></a>
+                <a href="ShowReel.html"><img src="./images/work-history2.jpg" alt="Image12"></a>
             </div>
         </div>
-    
-        <!-- TELEVISION Section -->
-        <div class="gallery-column">
-            <h1>&nbsp;</h1>
-            <div class="gallery-images">
-                <img src="./images/Hartklop3.png" alt="Hartklop">
-                <img src="./images/IamAllGirls5.png" alt="IamAllGirls">
-            </div>
-        </div>
-    
-        <!-- ADVERTISEMENTS Section -->
-        <div class="gallery-column">
-            <h1>&nbsp;</h1>
-            <div class="gallery-images">
-                <img src="./images/iNumber7.png" alt="iNumber7">
-                <img src="./images/Matilda6.png" alt="Matilda">
-            </div>
-        </div>
+        <button class="scroll-button right">&gt;</button>
     </div>
-</a>
+
+    <!-- Footer -->
     <footer>
         <p>&copy; 2025 Anneke Dempsey. All rights reserved.</p>
     </footer>
 
+    <!-- JavaScript -->
     <script>
        window.addEventListener("scroll", function() {
-    const overlay = document.querySelector(".overlay-text");
-    const gallery = document.querySelector(".gallery-container");
-    const galleryTop = gallery.getBoundingClientRect().top;
+           const overlay = document.querySelector(".overlay-text");
+           const gallery = document.querySelector(".gallery-container");
+           const galleryTop = gallery.getBoundingClientRect().top;
 
-    // Only hide overlay when the gallery is at or above 500px from the top
-    if (galleryTop <= 500) {
-        overlay.classList.add("hide-overlay");
-    } else {
-        overlay.classList.remove("hide-overlay");
-    }
-});
+           if (galleryTop <= 300) {
+               overlay.classList.add("hide-overlay");
+           } else {
+               overlay.classList.remove("hide-overlay");
+           }
+       });
 
+       const leftButton = document.querySelector('.left');
+       const rightButton = document.querySelector('.right');
+       const galleryImages = document.querySelector('.gallery-images');
+       const images = document.querySelectorAll('.gallery-images a');
+
+       const imageWidth = 200;
+       const gap = 2;
+       let currentPosition = 0;
+       const visibleImages = 3;
+
+       function updateButtons() {
+           leftButton.style.visibility = currentPosition === 0 ? 'hidden' : 'visible';
+           rightButton.style.visibility = 
+               currentPosition >= images.length - visibleImages ? 'hidden' : 'visible';
+       }
+
+       function scrollGallery(direction) {
+           const maxPosition = images.length - visibleImages;
+           currentPosition = Math.max(0, Math.min(maxPosition, currentPosition + direction));
+
+           galleryImages.style.transform = `translateX(-${currentPosition * (imageWidth + gap)}px)`;
+
+           updateButtons();
+       }
+
+       leftButton.addEventListener('click', () => scrollGallery(-1));
+       rightButton.addEventListener('click', () => scrollGallery(1));
+
+       updateButtons();
     </script>
-    
+
 </body>
 </html>
