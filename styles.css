@@ -10,24 +10,21 @@ body {
 /* Header */
 header {
     background-color: #333;
-    color: white;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
 }
 
 .header-content {
     display: flex;
     align-items: center;
-    justify-content: center;
-    position: relative;
+    justify-content: space-between;
 }
 
 /* Logo */
 .logo {
-    position: absolute;
-    top: 1rem; /* Ensures it stays within view */
+    width: 25px;
+    height: auto;
+    position: relative;
     left: 1rem;
-    border: 2px solid white;
-    width: 35px;
 }
 
 
@@ -48,15 +45,15 @@ footer {
 
 /* Navigation */
 nav {
-    display: flex;
-    justify-content: center;
-    background-color: #444;
+    flex-grow: 1;
+    text-align: center;
 }
 
 nav a {
     color: white;
     text-decoration: none;
-    padding: 1rem;
+    margin: 0 15px;
+    font-size: 1rem;
 }
 
 nav a:hover {
@@ -260,8 +257,9 @@ body {
 .video-background iframe {
     position: absolute;
     top: 50%;
+    margin-top: 50px; /* Adds space above the video */
     left: 50%;
-    width: 120vw;
+    width: 100vw;
     height: 120vh;
     transform: translate(-50%, -50%);
     pointer-events: none;
@@ -272,7 +270,10 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;   width: 100vw;
     height: 100vh;
     background: url('your-image.jpg') no-repeat center center;
     background-size: cover;

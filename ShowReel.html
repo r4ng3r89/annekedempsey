@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotHome</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+        .vertical-gallery {
+            width: 15%;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            scrollbar-width: none;
+            border: 2px solid lightgray;
+        }
+        .vertical-gallery::-webkit-scrollbar {
+            display: none;
+        }
+        .main-media {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        h1 {
+            color: lightgray;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="ALogo.jpg" alt="Anneke Dempsey" class="logo">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="ShowReel.html">Showreel</a>
+                <a href="contact.html">Contact</a>
+                <a href="work-history.html">Work History</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="video-background">
+        <iframe src="https://www.youtube.com/embed/aNkwvUm4NHw?autoplay=1&mute=1&loop=1&playlist=aNkwvUm4NHw&controls=0&showinfo=0&modestbranding=1" 
+                frameborder="0" allow="autoplay; fullscreen" allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- FILM Section -->
+    <h1>FILM</h1>
+    <div style="display: flex; height: 100vh;">
+        <div class="vertical-gallery">
+            <img src="./images/Ellen8.png" alt="Ellen" onclick="playVideo('https://www.youtube.com/embed/WdrChCO1NZQ')">
+            <img src="./images/Dogs1.jpg" alt="Dogs" onclick="playVideo('https://www.youtube.com/embed/bbzef52HNM0')">
+        </div>
+        <div class="main-media">
+            <iframe id="film-video" width="80%" height="650" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- TELEVISION Section -->
+    <h2> &nbsp;</h2>
+    <h1>TELEVISION</h1>
+    <div style="display: flex; height: 100vh;">
+        <div class="vertical-gallery">
+            <img src="./images/Hartklop3.png" alt="Hartklop" onclick="playVideo('https://www.youtube.com/embed/a-VrYHeJjTk')">
+            <img src="./images/IamAllGirls5.png" alt="IamAllGirls" onclick="playVideo('https://www.youtube.com/embed/0Z1GYKaZoyg')">
+            <img src="./images/Hartklop3.png" alt="Hartklop" onclick="playVideo('https://www.youtube.com/embed/a-VrYHeJjTk')">
+        </div>
+        <div class="main-media">
+            <iframe id="tv-video" width="80%" height="650" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- ADVERTISEMENTS Section -->
+    <h2> &nbsp;</h2>
+    <h1>ADVERTISEMENTS</h1>
+    <div style="display: flex; height: 100vh;">
+        <div class="vertical-gallery">
+            <img src="./images/iNumber7.png" alt="iNumber7" onclick="playVideo('https://www.youtube.com/embed/OYJECgPbrNA')">
+            <img src="./images/Matilda6.png" alt="Matilda" onclick="playVideo('https://www.youtube.com/embed/5GroWAOn8h8')">
+        </div>
+        <div class="main-media">
+            <iframe id="ads-video" width="80%" height="650" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        function playVideo(videoUrl) {
+            document.querySelectorAll('iframe').forEach(frame => frame.src = '');
+            event.target.closest('.vertical-gallery').nextElementSibling.querySelector('iframe').src = videoUrl + "?autoplay=1&mute=1";
+        }
+    </script>
+
+    <footer>
+        <p>&copy; 2025 Anneke Dempsey. All rights reserved.</p>
+    </footer>
+</body>
+</html>
