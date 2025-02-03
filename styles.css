@@ -5,6 +5,7 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     color: #333;
+    overflow-x: hidden;
 }
 
 /* Header */
@@ -21,12 +22,11 @@ header {
 
 /* Logo */
 .logo {
-    width: 25px;
+    width: 50px;
     height: auto;
     position: relative;
     left: 1rem;
 }
-
 
 /* Headings */
 h2 {
@@ -46,19 +46,28 @@ footer {
 /* Navigation */
 nav {
     flex-grow: 1;
+    display: flex;               /* Align links horizontally */
+    justify-content: center;     /* Center the links horizontally */
+    align-items: center;         /* Vertically center the links */
     text-align: center;
 }
 
+/* Navigation links */
 nav a {
     color: white;
     text-decoration: none;
-    margin: 0 15px;
+    margin: 0 5px;               /* Reduced margin for closeness */
     font-size: 1rem;
+    display: inline-block;
 }
 
 nav a:hover {
     background-color: #555;
 }
+
+
+
+
 
 /* Container */
 .container {
@@ -152,6 +161,7 @@ img {
     width: fit-content;
     margin: auto;
 }
+
 /* Fullscreen Image */
 .fullscreen-image {
     position: fixed;
@@ -177,132 +187,14 @@ img {
     text-align: center;
     z-index: 1;
 }
-/* General body styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-    overflow-x: hidden;
-}
 
-/* Video Background */
-.video-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    z-index: -2;
-}
-
-.video-background iframe {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 120vw;
-    height: 120vh;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}
-
-/* Fullscreen Image Overlay */
-.fullscreen-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: url('your-image.jpg') no-repeat center center;
-    background-size: cover;
-    opacity: 0.5; /* Adjust transparency */
-    z-index: -1;
-}
-
-/* Overlay Text */
-.overlay-text {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 3rem;
-    font-weight: bold;
-    text-align: center;
-    z-index: 1;
-}
-/* General body styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-    overflow-x: hidden;
-}
-
-/* Video Background */
-.video-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    z-index: -2;
-}
-
-.video-background iframe {
-    position: absolute;
-    top: 50%;
-    margin-top: 50px; /* Adds space above the video */
-    left: 50%;
-    width: 100vw;
-    height: 120vh;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}
-
-/* Fullscreen Image Overlay */
-.fullscreen-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 3rem;
-    font-weight: bold;
-    text-align: center;
-    z-index: 1;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.hide-overlay {
-    opacity: 0;
-    pointer-events: none;
-}
-
-
-/* Overlay Text */
-.overlay-text {
-    position: fixed; 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 3rem;
-    font-weight: bold;
-    text-align: center;
-    z-index: 1;
-}
 /* Gallery Container */
 .gallery-container {
     display: flex;
     width: 100%;
     padding: 20px 0;
     justify-content: space-between;
+    cursor: pointer; /* Makes it clear the container is clickable */
 }
 
 /* Each Column */
@@ -331,32 +223,28 @@ body {
     cursor: pointer;
 }
 
+/* Link for Gallery */
+a {
+    text-decoration: none; /* Removes default underline */
+    display: block;        /* Makes the entire container clickable */
+    width: 100%;
+    height: 100%;
+}
+
+/* Reset for potential interactions */
+.gallery-container a {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+/* Ensures the link doesn't affect other layout elements */
+header, nav, footer {
+    position: relative;
+    z-index: 1;
+}
 .hide-overlay {
     opacity: 0;
+    pointer-events: none; /* Prevent interaction when hidden */
     transition: opacity 0.5s ease-in-out;
-    pointer-events: none;
 }
-.gallery-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
-    padding: 10px;
-}
-
-.gallery-column {
-    flex: 1 1 30%;  /* Each column takes 30% of the width */
-    min-width: 250px; /* Ensure a minimum width for each column */
-}
-
-.gallery-images {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.gallery-images img {
-    width: 100%;  /* Images take full width of their container */
-    height: auto;
-}
-

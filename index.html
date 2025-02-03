@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NotHome</title>
+    <title>Anneke Dempsey</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -66,7 +66,7 @@
 <body>
     <header>
         <div class="header-content">
-            <img src="ALogo.jpg" alt="Anneke Dempsey" class="logo">
+            <img src="ALogo1.jpg" alt="Anneke Dempsey" class="logo">
             <nav>
                 <a href="index.html">Home</a>
                 <a href="ShowReel.html">Showreel</a>
@@ -88,7 +88,7 @@
         </div> 
  
     </div>
-
+    <a href="showreel.html">
     <div class="gallery-container">
         <!-- FILM Section -->
         <div class="gallery-column">
@@ -118,23 +118,25 @@
             </div>
         </div>
     </div>
-    
+</a>
     <footer>
         <p>&copy; 2025 Anneke Dempsey. All rights reserved.</p>
     </footer>
 
     <script>
-        window.addEventListener("scroll", function() {
-            const overlay = document.querySelector(".overlay-text");
-            const gallery = document.querySelector(".gallery-container");
-            const galleryTop = gallery.getBoundingClientRect().top;
-    
-            if (galleryTop <= 500) {
-                overlay.classList.add("hide-overlay");
-            } else {
-                overlay.classList.remove("hide-overlay");
-            }
-        });
+       window.addEventListener("scroll", function() {
+    const overlay = document.querySelector(".overlay-text");
+    const gallery = document.querySelector(".gallery-container");
+    const galleryTop = gallery.getBoundingClientRect().top;
+
+    // Only hide overlay when the gallery is at or above 500px from the top
+    if (galleryTop <= 500) {
+        overlay.classList.add("hide-overlay");
+    } else {
+        overlay.classList.remove("hide-overlay");
+    }
+});
+
     </script>
     
 </body>
