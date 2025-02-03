@@ -24,13 +24,12 @@ header {
 /* Logo */
 .logo {
     position: absolute;
+    top: 1rem; /* Ensures it stays within view */
     left: 1rem;
-    top: 50%;
     border: 2px solid white;
-    transform: translateY(-50%);
-    width: 25px;
-    height: auto;
+    width: 35px;
 }
+
 
 /* Headings */
 h2 {

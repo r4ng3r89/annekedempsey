@@ -7,21 +7,22 @@
     <title>NotHome</title>
     <link rel="stylesheet" href="styles.css">
 
- /head>
+</head>
 <body>
     <header>
     	<div class="header-content">
         	<img src="ALogo.jpg" alt="Anneke Dempsey" class="logo">
     	</div>
-        <?php include 'nav.php'; ?>
-   <nav>
-        <a href="index.html">Home</a>
-	    <a href="ShowReel.html">Showreel</a>
-        <a href="work-history.html">Work History</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-    </header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="ShowReel.html">Showreel</a>
+            <a href="work-history.html">Work History</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+   
 
+    </header>
+   
     <div class="video-background">
         <iframe src="https://www.youtube.com/embed/aNkwvUm4NHw?autoplay=1&mute=1&loop=1&playlist=aNkwvUm4NHw&controls=0&showinfo=0&modestbranding=1" 
                 frameborder="0" 
