@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotHome</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            overflow-x: hidden;
+        }
+        .video-section {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .video-background iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120vw;
+            height: 120vh;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        .fullscreen-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            z-index: 1;
+        }
+        .gallery-container {
+            display: flex;
+            width: 100vw;
+            height: auto;
+            padding: 50px 0;
+        }
+        .gallery-column {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+        }
+        .gallery-column h1 {
+            color: lightgray;
+        }
+        .gallery-images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .gallery-images img {
+            width: 45%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="ALogo.jpg" alt="Anneke Dempsey" class="logo">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="ShowReel.html">Showreel</a>
+                <a href="contact.html">Contact</a>
+                <a href="work-history.html">Work History</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="video-section">
+        <div class="video-background">
+            <iframe src="https://www.youtube.com/embed/aNkwvUm4NHw?autoplay=1&mute=1&loop=1&playlist=aNkwvUm4NHw&controls=0&showinfo=0&modestbranding=1" 
+                    frameborder="0" 
+                    allow="autoplay" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+        <div class="overlay-text">FILM<P><br>TELEVISION</P>
+        </div> 
+ 
+    </div>
+
+    <div class="gallery-container">
+        <!-- FILM Section -->
+        <div class="gallery-column">
+            <h1>FILM</h1>
+            <div class="gallery-images">
+                <img src="./images/Ellen8.png" alt="Ellen">
+                <img src="./images/Dogs1.jpg" alt="Dogs">
+            </div>
+        </div>
+    
+        <!-- TELEVISION Section -->
+        <div class="gallery-column">
+            <h1>TELEVISION</h1>
+            <div class="gallery-images">
+                <img src="./images/Hartklop3.png" alt="Hartklop">
+                <img src="./images/IamAllGirls5.png" alt="IamAllGirls">
+                <img src="./images/Hartklop3.png" alt="Hartklop">
+            </div>
+        </div>
+    
+        <!-- ADVERTISEMENTS Section -->
+        <div class="gallery-column">
+            <h1>ADVERTISEMENTS</h1>
+            <div class="gallery-images">
+                <img src="./images/iNumber7.png" alt="iNumber7">
+                <img src="./images/Matilda6.png" alt="Matilda">
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Anneke Dempsey. All rights reserved.</p>
+    </footer>
+
+    <script>
+        window.addEventListener("scroll", function() {
+            const overlay = document.querySelector(".overlay-text");
+            const gallery = document.querySelector(".gallery-container");
+            const galleryTop = gallery.getBoundingClientRect().top;
+    
+            if (galleryTop <= 200) {
+                overlay.classList.add("hide-overlay");
+            } else {
+                overlay.classList.remove("hide-overlay");
+            }
+        });
+    </script>
+    
+</body>
+</html>

@@ -267,23 +267,27 @@ body {
 
 /* Fullscreen Image Overlay */
 .fullscreen-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;   width: 100vw;
-    height: 100vh;
-    background: url('your-image.jpg') no-repeat center center;
-    background-size: cover;
-    opacity: 0.5; /* Adjust transparency */
-    z-index: -1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1;
+    transition: opacity 0.5s ease-in-out;
 }
+
+.hide-overlay {
+    opacity: 0;
+    pointer-events: none;
+}
+
 
 /* Overlay Text */
 .overlay-text {
-    position: fixed;
+    position: fixed; 
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -293,3 +297,66 @@ body {
     text-align: center;
     z-index: 1;
 }
+/* Gallery Container */
+.gallery-container {
+    display: flex;
+    width: 100%;
+    padding: 20px 0;
+    justify-content: space-between;
+}
+
+/* Each Column */
+.gallery-column {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Section Headings */
+.gallery-column h1 {
+    color: lightgray;
+    margin-bottom: 10px;
+}
+
+/* Images Layout */
+.gallery-images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.gallery-images img {
+    width: 45%;
+    cursor: pointer;
+}
+
+.hide-overlay {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: none;
+}
+.gallery-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+.gallery-column {
+    flex: 1 1 30%;  /* Each column takes 30% of the width */
+    min-width: 250px; /* Ensure a minimum width for each column */
+}
+
+.gallery-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.gallery-images img {
+    width: 100%;  /* Images take full width of their container */
+    height: auto;
+}
+
