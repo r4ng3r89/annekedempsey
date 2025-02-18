@@ -178,15 +178,56 @@ nav a:hover {
     width: 50%; /* Set width to 66% of the screen */
     display: inline-block; /* Allow it to sit next to the gallery section */
     padding-left: 1cm;
-    margin-top: 90px;
+    margin-top: 40px;
+    flex: 1; /* Allow the credits section to take available space */
 }
 
 /* Gallery Section */
 .cgallery-section {
-    width: 34%; /* Set width to the remaining 34% */
+    width: 24%; /* Set width to the remaining 34% */
     display: inline-block; /* Allow it to sit next to the split container */
+    margin-left: 20px; /* Space between credits and image */
+    margin-top: 130px; /* Add some top margin to lower the image */
 }
 .ad-image {
     width: 350px; /* Set the desired width */
     height: auto; /* Maintain aspect ratio */
+}
+
+/* Adjustments for Bio Container */
+.bio-container {
+    margin: 20px auto; /* Center the bio container */
+    max-width: 800px; /* Set a max width for better readability */
+    padding: 20px; /* Add padding for spacing */
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+    border-radius: 8px; /* Rounded corners */
+    display: flex; /* Use flexbox for alignment */
+    align-items: flex-start; /* Align items to the top */
+}
+
+/* Adjustments for Credits Section */
+.credits {
+    margin: 20px 0; /* Add margin for spacing */
+    padding: 10px; /* Add padding for spacing */
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+    border-radius: 8px; /* Rounded corners */
+}
+
+/* Adjustments for Year and Entry */
+.year {
+    color: #e9da9c; /* Change color for better visibility */
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.entry {
+    margin-bottom: 15px; /* Increase margin for better spacing */
+}
+
+.entry .title {
+    font-weight: bold;
+}
+.entry .details {
+    margin-left: 10px;
+    color: #777;
 }
