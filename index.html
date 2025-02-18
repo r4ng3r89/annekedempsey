@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anneke Dempsey</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .gallery-wrapper {
+            overflow: hidden;
+            width: calc(4 * (200px + 2px));
+        }
+
+        .gallery-images {
+            display: flex;
+            transition: transform 0.3s ease;
+            transform: translateX(0);
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -29,7 +41,7 @@
                     allowfullscreen>
             </iframe>
         </div>
-        <div class="overlay-text"><p>FILM<p>TELEVISION</p></div> 
+        <div class="overlay-text"><p>FILM<p>TELEVISION</div> 
     </div>
 
     <!-- Scroller Section -->
@@ -37,9 +49,15 @@
         <button class="scroll-button left">&lt;</button>
         <div class="gallery-wrapper">
             <div class="gallery-images">
-                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs1.jpg" alt="Image1"></a>
-                <a href="ShowReel.html"><img src="./images/Ellen8.png" alt="Image2"></a>
-                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2F7cNTUGDqhYk"><img src="./images/Hartklop3.png" alt="Image3"></a>
+                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs10.jpg" alt="Image10"></a>
+                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs11.jpg" alt="Image11"></a>
+                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs12.jpg" alt="Image12"></a>
+                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs13.jpg" alt="Image13"></a>
+                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs14.jpg" alt="Image14"></a>
+                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs15.jpg" alt="Image15"></a>
+                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs1.jpg" alt="Image14"></a>
+                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/kPlJutvmdVc"><img src="./images/Ellen8.png" alt="Image2"></a>
+                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2FZGsUbeByuzs&autoplay=1&mute=0"><img src="./images/Hartklop3.png" alt="Image3"></a>
                 <a href="ShowReel.html"><img src="./images/IamAllGirls5.png" alt="Image4"></a>
                 <a href="ShowReel.html"><img src="./images/iNumber7.png" alt="Image5"></a>
                 <a href="ShowReel.html"><img src="./images/Legacy4.jpg" alt="Image8"></a>
@@ -79,7 +97,7 @@
        const imageWidth = 200;
        const gap = 2;
        let currentPosition = 0;
-       const visibleImages = 3;
+       const visibleImages = 4;
 
        function updateButtons() {
            leftButton.style.visibility = currentPosition === 0 ? 'hidden' : 'visible';

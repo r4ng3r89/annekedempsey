@@ -66,14 +66,7 @@
         <!-- Video Section -->
         <div class="video-section">
             <div class="video-background">
-                <iframe id="videoFrame" 
-                src="https://www.youtube.com/embed/aNkwvUm4NHw?autoplay=0&mute=0&loop=1&playlist=aNkwvUm4NHw&controls=0&showinfo=0&modestbranding=1"
-                frameborder="0"
-                allow="autoplay; encrypted-media"
-                allowfullscreen>
-        </iframe>
-        
-                <div id="playButton" class="play-button">▶</div>
+                <iframe id="videoFrame" src="" frameborder="0" allow="autoplay" allowfullscreen></iframe>
             </div>
             <div class="overlay-text"></div> 
         </div>
@@ -94,9 +87,8 @@
             </div>
             <div class="gallery-item" onclick="playVideo('https://www.youtube.com/embed/ZGsUbeByuzs')">
                 <img src="./images/Hartklop3.png" alt="Image3">
-                <div class="gallery-description">Afrikaans language medical drama stories...</div>
+                <div class="gallery-description">Afrikaans language medical drama stories based around the staff and patients at the Beyers Naudé Academic Hospital, a state hospital in Johannesburg and the top training hospital in the country.</div>
             </div>
-            
             <!-- Add more gallery items as needed -->
             <div class="gallery-item" onclick="playVideo('https://www.youtube.com/embed/7cNTUGDqhYk')">
                 <img src="./images/Dogs1.jpg" alt="Image1">
@@ -109,7 +101,7 @@
                 <img src="./images/Ellen8.png" alt="Image2">
                 <div class="gallery-description">Based on true events, Ellen tells of the troubled relationship between a mother and her drug-addicted son - a relationship that will eventually drive her to the edge and lead to his murder</div>
             </div>
-            <div class="gallery-item" id="hartklop3 onclick="playVideo('https://www.youtube.com/embed/ZGsUbeByuzs')">
+            <div class="gallery-item" onclick="playVideo('https://www.youtube.com/embed/ZGsUbeByuzs')">
                 <img src="./images/Hartklop3.png" alt="Image3">
                 <div class="gallery-description">Afrikaans language medical drama stories based around the staff and patients at the Beyers Naudé Academic Hospital, a state hospital in Johannesburg and the top training hospital in the country.</div>
             </div>
@@ -123,37 +115,61 @@
 
     <!-- JavaScript -->
     <script>
-    function playVideo(videoUrl) {
-    const videoFrame = document.getElementById('videoFrame');
-    let separator = videoUrl.includes("?") ? "&" : "?";
-    videoFrame.src = videoUrl + separator + "autoplay=1&mute=0"; // Ensure sound is enabled
-    document.getElementById('playButton').style.display = "none"; // Hide button
-}
-       
-       window.addEventListener("scroll", function() {
-           const overlay = document.querySelector(".overlay-text");
-           const gallery = document.querySelector(".gallery-section");
-           const galleryTop = gallery.getBoundingClientRect().top;
+        function playVideo(videoUrl, shouldUnmute = true) {
+            const videoFrame = document.getElementById('videoFrame');
+            videoFrame.src = videoUrl + '?autoplay=1' + (shouldUnmute ? '&mute=0' : '&mute=1'); // Mute based on the flag
+        }
 
-           // Hide overlay when scrolling past a certain point
-           if (galleryTop <= 500) {
-               overlay.classList.add("hide-overlay");
-           } else {
-               overlay.classList.remove("hide-overlay");
-           }
-       })
+        // Read the video URL from the query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoUrl = urlParams.get('videourl');
 
-       
-       document.addEventListener("DOMContentLoaded", function () {
-    const playButton = document.getElementById('playButton');
-    const videoFrame = document.getElementById('videoFrame');
+        if (videoUrl) {
+            playVideo(videoUrl, true); // Play the video with sound if the URL parameter is present
+        } else {
+            // Default video with mute
+            playVideo('https://www.youtube.com/embed/aNkwvUm4NHw', false);
+        }
 
-    playButton.addEventListener("click", function () {
-        let currentSrc = videoFrame.src.split("?")[0]; // Remove existing params
-        videoFrame.src = currentSrc + "?autoplay=1&mute=0"; // Play with sound
-        playButton.style.display = "none"; // Hide play button
-    });
-});
+        // Function to unmute and play the video
+        function unmuteAndPlay() {
+            const videoFrame = document.getElementById('videoFrame');
+            videoFrame.src = videoFrame.src.replace('mute=1', 'mute=0'); // Change mute to 0
+            const unmuteButton = document.getElementById('unmuteButton');
+            unmuteButton.style.display = 'none'; // Hide the button after clicking
+        }
+
+        // Show the unmute button when the video is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const unmuteButton = document.createElement('button');
+            unmuteButton.textContent = 'Play with Sound';
+            unmuteButton.id = 'unmuteButton'; // Set an ID for the button
+            unmuteButton.style.position = 'absolute'; // Use absolute positioning
+            unmuteButton.style.top = '50%'; // Center vertically
+            unmuteButton.style.left = '50%'; // Center horizontally
+            unmuteButton.style.transform = 'translate(-50%, -50%)'; // Adjust for centering
+            unmuteButton.style.zIndex = '1000'; // Ensure it is above other elements
+            unmuteButton.onclick = unmuteAndPlay; // Set the click event
+            document.body.appendChild(unmuteButton);
+
+            // Hide the unmute button if no video URL is present
+            if (!urlParams.get('videourl')) {
+                unmuteButton.style.display = 'none'; // Hide the button if no video URL
+            }
+        });
+
+        window.addEventListener("scroll", function() {
+            const overlay = document.querySelector(".overlay-text");
+            const gallery = document.querySelector(".gallery-section");
+            const galleryTop = gallery.getBoundingClientRect().top;
+
+            // Hide overlay when scrolling past a certain point
+            if (galleryTop <= 500) {
+                overlay.classList.add("hide-overlay");
+            } else {
+                overlay.classList.remove("hide-overlay");
+            }
+        });
     </script>
 
 </body>
