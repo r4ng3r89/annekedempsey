@@ -16,6 +16,15 @@
             transition: transform 0.3s ease;
             transform: translateX(0);
         }
+
+        /* Ensure all links remain white */
+        a {
+            color: white; /* Original color */
+            text-decoration: none; /* Remove underline */
+        }
+        a:visited {
+            color: white !important; /* Keep visited links the same color */
+        }
     </style>
 </head>
 <body>
@@ -41,6 +50,13 @@
                     allowfullscreen>
             </iframe>
         </div>
+        <div class="coverlay-text">
+            <h2>Discover Anneke's Work</h2>
+            <p><a href="ShowReel.html" class="cta-button">View my Show Reel</a></p>
+            <p><a href="work-history.html" class="cta-button">Film and Production design Experience</a></p>
+            <p><a href="contact.html" class="cta-button">Contact Anneke</a></p>
+        </div>
+    
         <div class="overlay-text"><p>FILM<p>TELEVISION</div> 
     </div>
 
@@ -67,10 +83,11 @@
         <button class="scroll-button right">&gt;</button>
     </div>
 
-    <!-- Footer -->
+   
     <footer>
-        <p>&copy; 2025 Anneke Dempsey. All rights reserved.</p>
+        <p>&copy; 2025 Anneke Dempsey | <a href="https://www.instagram.com/annekedempsey">Instagram</a> | <a href="https://www.imdb.com/name/nm1234567/">IMDb</a></p>
     </footer>
+
 
     <!-- JavaScript -->
     <script>

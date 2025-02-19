@@ -57,7 +57,9 @@ nav a {
     margin: 0 10px;
     font-size: 1rem; /* Ensure consistent font size */
 }
-
+nav a:visited {
+    color: white !important; /* Force visited links to remain white */
+}
 nav a:hover {
     background-color: #555;
 }
@@ -89,10 +91,21 @@ nav a:hover {
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bold;
     text-align: center;
     z-index: 1;
+}
+.coverlay-text {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1rem;
+/*    font-weight: bold;
+    text-align: center;
+    z-index: 1; */
 }
 
 /* Gallery Container */
