@@ -245,3 +245,32 @@ nav a:hover {
     margin-left: 10px;
     color: #777;
 }
+
+/* Add responsive styles */
+@media (max-width: 600px) {
+    .gallery-wrapper {
+        width: calc(2 * (200px + 2px)); /* Adjust width for smaller screens */
+    }
+
+    .gallery-images img {
+        width: 100%; /* Make images responsive */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .overlay-text h2 {
+        font-size: 1.5rem; /* Adjust font size for smaller screens */
+    }
+
+    .overlay-text p {
+        font-size: 1rem; /* Adjust font size for smaller screens */
+    }
+
+    .header-content img {
+        width: 80%; /* Make logo responsive */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .scroll-button {
+        font-size: 1.5rem; /* Adjust button size for smaller screens */
+    }
+}
