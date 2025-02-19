@@ -45,6 +45,17 @@
         .gallery-description {
             flex-grow: 1; /* Take remaining space for text */
         }
+
+        
+        /* Ensure all links remain white */
+        a {
+            color: white; /* Original color */
+            text-decoration: none; /* Remove underline */
+        }
+        a:visited {
+            color: white !important; /* Keep visited links the same color */
+        }
+
     </style>
 </head>
 <body>
@@ -110,7 +121,8 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Anneke Dempsey. All rights reserved.</p>
+        <p>&copy; 2025 Anneke Dempsey | <a href="https://www.instagram.com/annekedempsey">Instagram</a> | <a href="https://www.imdb.com/name/nm1234567/">IMDb</a></p>
+
     </footer>
 
     <!-- JavaScript -->
