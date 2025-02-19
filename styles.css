@@ -87,12 +87,12 @@ nav a:hover {
 /* Overlay Text */
 .overlay-text {
     position: absolute;
-    top: 50%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 1rem;
+  /*  font-weight: bold; */
     text-align: center;
     z-index: 1;
 }
