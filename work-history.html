@@ -14,19 +14,21 @@
         a:visited {
             color: rgb(180, 179, 179) !important; /* Keep visited links the same color */
         }
-</style>
-    
+    </style>
 </head>
 <body>
     <header>
         <div class="header-content">
-            <img src="ALogo1.jpg" alt="Anneke Dempsey" class="logo">
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="ShowReel.html">Showreel</a>
-                <a href="contact.html">Contact</a>
-                <a href="work-history.html">Work History</a>
-            </nav>
+            <div class="logo-container">
+                <img src="ALogo1.jpg" alt="Anneke Dempsey" class="logo">
+                <nav class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="ShowReel.html" class="nav-link">Showreel</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="work-history.html" class="nav-link">Work History</a>
+                </nav>
+            </div>
+            <button class="mobile-menu-button">☰</button>
         </div>
     </header>
 <main>
@@ -196,5 +198,21 @@
     <footer>
         <p>&copy; 2025 Anneke Dempsey | <a href="https://www.instagram.com/annekedempsey">Instagram</a> | <a href="https://www.imdb.com/name/nm1234567/">IMDb</a></p>
     </footer>
+    <!-- JavaScript for mobile menu functionality -->
+    <script>
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuButton.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.header-content')) {
+                navLinks.classList.remove('show');
+            }
+        });
+    </script>
 </body>
 </html>
