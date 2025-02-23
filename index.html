@@ -3,27 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anneke Dempsey from Main</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Anneke Dempsey</title>
     <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: white;
+            background-color: black;
+        }
+
+        /* Header styles - Updated */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Video section styles */
+        .video-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-background iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 1rem;
+            backdrop-filter: blur(5px);
+            transition: opacity 0.3s ease;
+        }
+
+        .overlay-text h2 {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .hide-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Gallery styles */
+        .gallery-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
         .gallery-wrapper {
             overflow: hidden;
-            width: calc(4 * (200px + 2px));
+            width: 100%;
+            margin: 0 auto;
         }
 
         .gallery-images {
-            display: flex;
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: calc(25% - 1rem);
+            gap: 1rem;
             transition: transform 0.3s ease;
-            transform: translateX(0);
         }
 
-        /* Ensure all links remain white */
-        a {
-            color: white; /* Original color */
-            text-decoration: none; /* Remove underline */
+        .gallery-images img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            transition: transform 0.3s ease;
         }
-        a:visited {
-            color: rgb(180, 179, 179) !important; /* Keep visited links the same color */
+
+        .gallery-images img:hover {
+            transform: scale(1.05);
+        }
+
+        .scroll-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 10;
+        }
+
+        .scroll-button:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .scroll-button.left {
+            left: 0;
+        }
+
+        .scroll-button.right {
+            right: 0;
+        }
+
+        /* CTA Button styles */
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            margin: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid white;
+            border-radius: 2rem;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .cta-button:hover {
+            background: white;
+            color: black;
+        }
+
+        /* Footer styles */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            margin-top: 2rem;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.9);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                padding: 0.8rem;
+            }
+
+            .overlay-text h2 {
+                font-size: 1.8rem;
+            }
+
+            .gallery-images {
+                grid-auto-columns: calc(50% - 0.5rem);
+            }
+
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                height: 40px;
+            }
+
+            .overlay-text {
+                padding: 1rem;
+            }
+
+            .overlay-text h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .gallery-images {
+                grid-auto-columns: calc(100% - 1rem);
+            }
+
+            .scroll-button {
+                width: 32px;
+                height: 32px;
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -31,13 +306,15 @@
     <!-- Header -->
     <header>
         <div class="header-content">
-            <img src="ALogo1.jpg" alt="Anneke Dempsey" class="logo">
-        <!--   <nav>
-                <a href="index.html">Home</a>
-                <a href="ShowReel.html">Showreel</a>
-                <a href="contact.html">Contact</a>
-                <a href="work-history.html">Work History</a>
-            </nav> -->
+            <div class="logo-container">
+                <img src="ALogo1.jpg" alt="Anneke Dempsey" class="logo">
+                <nav class="nav-links">
+                    <a href="ShowReel.html" class="nav-link">Show Reel</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="work-history.html" class="nav-link">Production Design</a>
+                </nav>
+            </div>
+            <button class="mobile-menu-button">☰</button>
         </div>
     </header>
 
@@ -51,88 +328,103 @@
             </iframe>
         </div>
         
-        <div class="overlay-text">    <h2>Discover Anneke's Work</h2>
-            <p><a href="ShowReel.html" class="cta-button">View my Show Reel</a></p>
-            <p><a href="contact.html" class="cta-button">Contact Anneke</a></p>
-            <p><a href="work-history.html" class="cta-button">Production design Experience</a></p>
+        <div class="overlay-text">
+            <h2>Discover Anneke's Work</h2>
+        </div>
+    </div>
 
-        </div> 
-         
-            </div>
-
-    <!-- Scroller Section -->
+    <!-- Gallery Section -->
     <div class="gallery-container">
         <button class="scroll-button left">&lt;</button>
         <div class="gallery-wrapper">
             <div class="gallery-images">
-                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs10.jpg" alt="Image10"></a>
-                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs11.jpg" alt="Image11"></a>
-                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs12.jpg" alt="Image12"></a>
-                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs13.jpg" alt="Image13"></a>
-                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs14.jpg" alt="Image14"></a>
-                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs1.jpg" alt="Image14"></a>
-                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/kPlJutvmdVc"><img src="./images/Ellen8.png" alt="Image2"></a>
+                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2F7cNTUGDqhYk&autoplay=1&mute=0"><img src="./images/Dogs1.jpg" alt="Image3"></a>
+                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2FkPlJutvmdVc&autoplay=1&mute=0"><img src="./images/Ellen8.png" alt="Image4"></a>
                 <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2FZGsUbeByuzs&autoplay=1&mute=0"><img src="./images/Hartklop3.png" alt="Image3"></a>
-                <a href="ShowReel.html"><img src="./images/IamAllGirls5.png" alt="Image4"></a>
-                <a href="ShowReel.html"><img src="./images/iNumber7.png" alt="Image5"></a>
-                <a href="ShowReel.html"><img src="./images/Legacy4.jpg" alt="Image8"></a>
-                <a href="ShowReel.html"><img src="./images/Matilda6.png" alt="Image9"></a>
-                <a href="ShowReel.html"><img src="./images/SomvanTwee2.png" alt="Image10"></a>
+                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2FzMPS9JO0p6w&autoplay=1&mute=0"><img src="./images/IamAllGirls5.png" alt="Image4"></a>
+                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2FhSWhMglY4Kk&autoplay=1&mute=0"><img src="./images/iNumber7.png" alt="Image5"></a>
+                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2F8W2nSg4wS84&autoplay=1&mute=0"><img src="./images/Legacy4.jpg" alt="Image8"></a>
+                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2F_LK06UQ58PI&autoplay=1&mute=0"><img src="./images/Matilda6.png" alt="Image9"></a>
+                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2FREVQPjFnwo&autoplay=1&mute=0"><img src="./images/SomvanTwee2.png" alt="Image10"></a>
             </div>
         </div>
         <button class="scroll-button right">&gt;</button>
     </div>
 
-   
+    <!-- Footer -->
     <footer>
         <p>&copy; 2025 Anneke Dempsey | <a href="https://www.instagram.com/annekedempsey">Instagram</a> | <a href="https://www.imdb.com/name/nm1234567/">IMDb</a></p>
     </footer>
 
-
     <!-- JavaScript -->
     <script>
-       window.addEventListener("scroll", function() {
-           const overlay = document.querySelector(".overlay-text");
-           const gallery = document.querySelector(".gallery-container");
-           const galleryTop = gallery.getBoundingClientRect().top;
+        // Previous scroll event listener
+        window.addEventListener("scroll", function() {
+            const overlay = document.querySelector(".overlay-text");
+            const gallery = document.querySelector(".gallery-container");
+            const galleryTop = gallery.getBoundingClientRect().top;
 
-           if (galleryTop <= 300) {
-               overlay.classList.add("hide-overlay");
-           } else {
-               overlay.classList.remove("hide-overlay");
-           }
-       });
+            if (galleryTop <= 300) {
+                overlay.classList.add("hide-overlay");
+            } else {
+                overlay.classList.remove("hide-overlay");
+            }
+        });
 
-       const leftButton = document.querySelector('.left');
-       const rightButton = document.querySelector('.right');
-       const galleryImages = document.querySelector('.gallery-images');
-       const images = document.querySelectorAll('.gallery-images a');
+        // Mobile menu functionality
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const navLinks = document.querySelector('.nav-links');
 
-       const imageWidth = 200;
-       const gap = 2;
-       let currentPosition = 0;
-       const visibleImages = 4;
+        mobileMenuButton.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
 
-       function updateButtons() {
-           leftButton.style.visibility = currentPosition === 0 ? 'hidden' : 'visible';
-           rightButton.style.visibility = 
-               currentPosition >= images.length - visibleImages ? 'hidden' : 'visible';
-       }
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.header-content')) {
+                navLinks.classList.remove('show');
+            }
+        });
 
-       function scrollGallery(direction) {
-           const maxPosition = images.length - visibleImages;
-           currentPosition = Math.max(0, Math.min(maxPosition, currentPosition + direction));
+        // Previous gallery functionality remains the same
+        const leftButton = document.querySelector('.left');
+        const rightButton = document.querySelector('.right');
+        const galleryImages = document.querySelector('.gallery-images');
+        const images = document.querySelectorAll('.gallery-images a');
 
-           galleryImages.style.transform = `translateX(-${currentPosition * (imageWidth + gap)}px)`;
+        let currentPosition = 0;
+        const imagesPerView = window.innerWidth <= 480 ? 1 : window.innerWidth <= 768 ? 2 : 4;
 
-           updateButtons();
-       }
+        function updateButtons() {
+            leftButton.style.visibility = currentPosition === 0 ? 'hidden' : 'visible';
+            rightButton.style.visibility = 
+                currentPosition >= images.length - imagesPerView ? 'hidden' : 'visible';
+        }
 
-       leftButton.addEventListener('click', () => scrollGallery(-1));
-       rightButton.addEventListener('click', () => scrollGallery(1));
+        function scrollGallery(direction) {
+            const maxPosition = images.length - imagesPerView;
+            currentPosition = Math.max(0, Math.min(maxPosition, currentPosition + direction));
+            
+            const translateX = -(currentPosition * (100 / imagesPerView));
+            galleryImages.style.transform = `translateX(${translateX}%)`;
 
-       updateButtons();
+            updateButtons();
+        }
+
+        leftButton.addEventListener('click', () => scrollGallery(-1));
+        rightButton.addEventListener('click', () => scrollGallery(1));
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            const newImagesPerView = window.innerWidth <= 480 ? 1 : window.innerWidth <= 768 ? 2 : 4;
+            if (newImagesPerView !== imagesPerView) {
+                currentPosition = 0;
+                galleryImages.style.transform = 'translateX(0)';
+                updateButtons();
+            }
+        });
+
+        updateButtons();
     </script>
-
 </body>
 </html>
