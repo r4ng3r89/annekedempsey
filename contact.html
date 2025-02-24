@@ -15,6 +15,68 @@
         a:visited {
             color: rgb(180, 179, 179) !important; /* Keep visited links the same color */
         }
+/* Navigation styles */
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1.5rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.mobile-menu-button {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .mobile-menu-button {
+        display: block;
+    }
+
+    .nav-link {
+        width: 100%;
+        text-align: center;
+        padding: 0.8rem;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -24,9 +86,9 @@
                 <img src="ALogo1.jpg" alt="Anneke Dempsey" class="logo">
                 <nav class="nav-links">
                     <a href="index.html" class="nav-link">Home</a>
-                    <a href="ShowReel.html" class="nav-link">Showreel</a>
+                    <a href="ShowReel.html" class="nav-link">Show Reel</a>
                     <a href="contact.html" class="nav-link">Contact</a>
-                    <a href="work-history.html" class="nav-link">Work History</a>
+                    <a href="work-history.html" class="nav-link">Production Design</a>
                 </nav>
             </div>
             <button class="mobile-menu-button">☰</button>
