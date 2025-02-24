@@ -8,78 +8,115 @@
     <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* General styles */
-        body {
-            font-family: Arial, sans-serif;
-            font-size: 16px; /* Set a base font size */
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-/* Navigation styles */
-.nav-links {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: white;
+            background-color: black;
+        }
 
-.nav-link {
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 1.5rem;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.1);
-}
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+        }
 
-.nav-link:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-}
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
 
-.mobile-menu-button {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0.5rem;
-}
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.9);
-        backdrop-filter: blur(10px);
-        flex-direction: column;
-        padding: 1rem;
-        gap: 1rem;
-    }
+        .logo {
+            height: 60px;
+            width: auto;
+        }
 
-    .nav-links.show {
-        display: flex;
-    }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
 
-    .mobile-menu-button {
-        display: block;
-    }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+        }
 
-    .nav-link {
-        width: 100%;
-        text-align: center;
-        padding: 0.8rem;
-    }
-}
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
 
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.9);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                padding: 0.8rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="header-content">
             <div class="logo-container">
@@ -94,57 +131,13 @@
             <button class="mobile-menu-button">☰</button>
         </div>
     </header>
-
-    <!-- Video Section -->
-    <div class="video-section">
-        <div class="video-background">
-            <iframe src="https://www.youtube.com/embed/aNkwvUm4NHw?autoplay=1&mute=1&loop=1&playlist=aNkwvUm4NHw&controls=0&showinfo=0&modestbranding=1" 
-                    frameborder="0" 
-                    allow="autoplay" 
-                    allowfullscreen>
-            </iframe>
-        </div>
-    </div>
-
-    <!-- Gallery Section -->
-    <div class="gallery-container">
-        <button class="scroll-button left">&lt;</button>
-        <div class="gallery-wrapper">
-            <div class="gallery-images">
-                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2F7cNTUGDqhYk&autoplay=1&mute=0"><img src="./images/Dogs1.jpg" alt="Image3"></a>
-                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2FkPlJutvmdVc&autoplay=1&mute=0"><img src="./images/Ellen8.png" alt="Image4"></a>
-                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2FZGsUbeByuzs&autoplay=1&mute=0"><img src="./images/Hartklop3.png" alt="Image3"></a>
-                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2FzMPS9JO0p6w&autoplay=1&mute=0"><img src="./images/IamAllGirls5.png" alt="Image4"></a>
-                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2FhSWhMglY4Kk&autoplay=1&mute=0"><img src="./images/iNumber7.png" alt="Image5"></a>
-                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2F8W2nSg4wS84&autoplay=1&mute=0"><img src="./images/Legacy4.jpg" alt="Image8"></a>
-                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2F_LK06UQ58PI&autoplay=1&mute=0"><img src="./images/Matilda6.png" alt="Image9"></a>
-                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2FREVQPjFnwo&autoplay=1&mute=0"><img src="./images/SomvanTwee2.png" alt="Image10"></a>
-            </div>
-        </div>
-        <button class="scroll-button right">&gt;</button>
-    </div>
-
-    <!-- Footer -->
+    <main>
+        <!-- Main content goes here -->
+    </main>
     <footer>
         <p>&copy; 2025 Anneke Dempsey | <a href="https://www.instagram.com/annekedempsey">Instagram</a> | <a href="https://www.imdb.com/name/nm1234567/">IMDb</a></p>
     </footer>
-
-    <!-- JavaScript -->
     <script>
-        // Previous scroll event listener
-        window.addEventListener("scroll", function() {
-            const overlay = document.querySelector(".overlay-text");
-            const gallery = document.querySelector(".gallery-container");
-            const galleryTop = gallery.getBoundingClientRect().top;
-
-            if (galleryTop <= 300) {
-                overlay.classList.add("hide-overlay");
-            } else {
-                overlay.classList.remove("hide-overlay");
-            }
-        });
-
-        // Mobile menu functionality
         const mobileMenuButton = document.querySelector('.mobile-menu-button');
         const navLinks = document.querySelector('.nav-links');
 
@@ -158,46 +151,6 @@
                 navLinks.classList.remove('show');
             }
         });
-
-        // Previous gallery functionality remains the same
-        const leftButton = document.querySelector('.left');
-        const rightButton = document.querySelector('.right');
-        const galleryImages = document.querySelector('.gallery-images');
-        const images = document.querySelectorAll('.gallery-images a');
-
-        let currentPosition = 0;
-        const imagesPerView = window.innerWidth <= 480 ? 1 : window.innerWidth <= 768 ? 2 : 4;
-
-        function updateButtons() {
-            leftButton.style.visibility = currentPosition === 0 ? 'hidden' : 'visible';
-            rightButton.style.visibility = 
-                currentPosition >= images.length - imagesPerView ? 'hidden' : 'visible';
-        }
-
-        function scrollGallery(direction) {
-            const maxPosition = images.length - imagesPerView;
-            currentPosition = Math.max(0, Math.min(maxPosition, currentPosition + direction));
-            
-            const translateX = -(currentPosition * (100 / imagesPerView));
-            galleryImages.style.transform = `translateX(${translateX}%)`;
-
-            updateButtons();
-        }
-
-        leftButton.addEventListener('click', () => scrollGallery(-1));
-        rightButton.addEventListener('click', () => scrollGallery(1));
-
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            const newImagesPerView = window.innerWidth <= 480 ? 1 : window.innerWidth <= 768 ? 2 : 4;
-            if (newImagesPerView !== imagesPerView) {
-                currentPosition = 0;
-                galleryImages.style.transform = 'translateX(0)';
-                updateButtons();
-            }
-        });
-
-        updateButtons();
     </script>
 </body>
 </html>

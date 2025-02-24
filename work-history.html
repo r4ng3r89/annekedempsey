@@ -6,110 +6,52 @@
     <title>Anneke Dempsey</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background: linear-gradient(135deg, #1a1a1a 0%, #0a192f 100%);
-            color: #f0f0f0;
-            min-height: 100vh;
-            font-family: 'Arial', sans-serif;
-            font-size: 16px; /* Set a base font size */
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: white;
+            background-color: black;
         }
 
-        .bio-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        h2 {
-            color: #ffffff;
-            font-size: 2rem; /* 32px */
-            text-align: center;
-            margin-bottom: 3rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .credits {
-            display: flex;
-            flex-direction: column;
-            gap: 0.1rem;
-        }
-
-        .year {
-            color: #64ffda;
-            font-size: 1.5rem; /* 24px */
-            font-weight: bold;
-            margin: 2rem 0 1rem;
-            border-bottom: 2px solid #64ffda;
-            padding-bottom: 0.5rem;
-            width: fit-content;
-        }
-
-        .entry {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 0.5rem;
-            margin-bottom: 0.1rem;
-            transition: transform 0.3s ease, background 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .entry:hover {
-            transform: translateY(-5px);
-            background: rgba(50, 50, 50, 0.2);
-        }
-
-        .entry .title {
-            color: #ffffff;
-            font-size: 1.0rem; /* 20.8px */
-            font-weight: bold;
-            margin-bottom: 0.0rem;
-        }
-
-        .details {
-            color: #eee5e5;
-            font-size: 1rem; /* 16px */
-            line-height: 1.0;
-        }
-
-        footer {
-            background: rgba(0, 0, 0, 0.7);
-            margin-top: 3rem;
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
             padding: 1rem;
-            text-align: center;
         }
 
-        footer a {
-            color: #64ffda;
-            text-decoration: none;
-            transition: color 0.3s ease;
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
         }
 
-        footer a:hover {
-            color: #ffffff;
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
-        @media (max-width: 768px) {
-            .bio-container {
-                padding: 1rem;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-
-            .entry {
-                padding: 1rem;
-            }
-
-            .year {
-                font-size: 1.5rem;
-            }
+        .logo {
+            height: 60px;
+            width: auto;
         }
 
-        /* Navigation styles */
         .nav-links {
             display: flex;
             gap: 2rem;
@@ -173,7 +115,6 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="header-content">
             <div class="logo-container">
@@ -191,6 +132,7 @@
 
     <main style="margin-top: 60px;">
         <div class="bio-container">
+            <h2>Work History</h2>
             <div class="credits">
                 <div class="year">2023</div>
                 <div class="entry">
