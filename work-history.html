@@ -6,17 +6,112 @@
     <title>Anneke Dempsey</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Ensure all links remain white */
-        a {
-            color: white; /* Original color */
-            text-decoration: none; /* Remove underline */
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a192f 100%);
+            color: #f0f0f0;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            font-size: 16px; /* Set a base font size */
         }
-        a:visited {
-            color: rgb(180, 179, 179) !important; /* Keep visited links the same color */
+
+        .bio-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #ffffff;
+            font-size: 2rem; /* 32px */
+            text-align: center;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .credits {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .year {
+            color: #64ffda;
+            font-size: 1.5rem; /* 24px */
+            font-weight: bold;
+            margin: 2rem 0 1rem;
+            border-bottom: 2px solid #64ffda;
+            padding-bottom: 0.5rem;
+            width: fit-content;
+        }
+
+        .entry {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.5rem;
+            margin-bottom: 0.1rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .entry:hover {
+            transform: translateY(-5px);
+            background: rgba(50, 50, 50, 0.2);
+        }
+
+        .entry .title {
+            color: #ffffff;
+            font-size: 1.0rem; /* 20.8px */
+            font-weight: bold;
+            margin-bottom: 0.0rem;
+        }
+
+        .details {
+            color: #eee5e5;
+            font-size: 1rem; /* 16px */
+            line-height: 1.0;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.7);
+            margin-top: 3rem;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        footer a {
+            color: #64ffda;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .bio-container {
+                padding: 1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .entry {
+                padding: 1rem;
+            }
+
+            .year {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <div class="header-content">
             <div class="logo-container">
@@ -31,10 +126,9 @@
             <button class="mobile-menu-button">☰</button>
         </div>
     </header>
-<main>
-    <div class="bio-container">
-        <h2><br>Production Credits</h2>
-        <div class="credits">
+
+    <main style="margin-top: 60px;">
+        <div class="bio-container">
             <div class="credits">
                 <div class="year">2023</div>
                 <div class="entry">
@@ -193,11 +287,13 @@
                     <div class="details">for IV Series-DR & Stage 5 Films Denmark with Nikolaj Danielsen and Waldemar Coetsee</div>
                 </div>
             </div>    
-    </div>
-</main>
+        </div>
+    </main>
+
     <footer>
         <p>&copy; 2025 Anneke Dempsey | <a href="https://www.instagram.com/annekedempsey">Instagram</a> | <a href="https://www.imdb.com/name/nm1234567/">IMDb</a></p>
     </footer>
+
     <!-- JavaScript for mobile menu functionality -->
     <script>
         const mobileMenuButton = document.querySelector('.mobile-menu-button');

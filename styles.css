@@ -6,6 +6,7 @@ body {
     background-color: black;
     color: white;
     overflow-x: hidden;
+    font-size: 16px; /* Set a base font size */
 }
 
 /* Header (Fixed Navigation) */
@@ -55,7 +56,7 @@ nav a {
     color: white;
     text-decoration: none;
     margin: 0 10px;
-    font-size: 1rem; /* Ensure consistent font size */
+    font-size: 1rem; /* 16px */
 }
 nav a:visited {
     color: white !important; /* Force visited links to remain white */

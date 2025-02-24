@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Reel - Anneke Dempsey</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: white;
+            background-color: black;
+        }
+
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Main content styles */
+        .main-content {
+            padding-top: 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 4rem;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            margin-bottom: 2rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 1rem;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .video-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .video-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-item iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-info p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.9);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                padding: 0.8rem;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                height: 40px;
+            }
+
+            .main-content {
+                padding-top: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="ALogo1.jpg" alt="Anneke Dempsey" class="logo">
+                <nav class="nav-links">
+                    <a href="ShowReel.html" class="nav-link">Show Reel</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="work-history.html" class="nav-link">Production Design</a>
+                </nav>
+            </div>
+            <button class="mobile-menu-button">☰</button>
+        </div>
+    </header>
+
+
+        <!-- Video Grid -->
+        <div class="video-grid">
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/7cNTUGDqhYk" allowfullscreen></iframe>
+                <div class="video-info">
+                    <h3>Dogs</h3>
+                    <p>"Don't Let's Go to the Dogs Tonight" by Alexandra Fuller is a gripping memoir chronicling the author's tumultuous childhood in war-torn Africa, capturing the raw and poignant experiences of her family.
+                        <br><b>Production Designer</b>
+                    </p>
+                </div>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/kPlJutvmdVc" allowfullscreen></iframe>
+                <div class="video-info">
+                    <h3>Ellen</h3>
+                    <p>Based on true events, Ellen tells of the troubled relationship between a mother and her drug-addicted son - a relationship that will eventually drive her to the edge and lead to his murder
+                    <br><b>Production Designer</b>
+                </div>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/ZGsUbeByuzs" allowfullscreen></iframe>
+                <div class="video-info">
+                    <h3>Hartklop</h3>
+                    <p>"Hartklop" is an Afrikaans medical drama series set in the Beyers Naudé Academic Hospital in Johannesburg, focusing on the lives of the staff and patients as they navigate personal and professional challenges<br>Production Design</p>
+                </div>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/zMPS9JO0p6w" allowfullscreen></iframe>
+                <div class="video-info">
+                    <h3>I am All Girls</h3>
+                    <p>"I Am All Girls" is a 2021 South African mystery thriller film directed by Donovan Marsh. The story follows detective Jodie Snyman and her colleague Ntombizonke Bapai as they work to dismantle an apartheid-era sex-trafficking syndicate. The film is inspired by true events and delves into the dark world of human trafficking<br>Production Design</p>
+                </div>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/hSWhMglY4Kk" allowfullscreen></iframe>
+                <div class="video-info">
+                    <h3>iNumber</h3>
+                    <p>"Inumber Number" is a South African action thriller film directed by Donovan Marsh. The story revolves around an undercover police officer and his best friend who plan a major heist but find themselves double-crossed by their own gang.<br>Production Design</p>
+                </div>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/8W2nSg4wS84" allowfullscreen></iframe>
+                <div class="video-info">
+                    <h3>Legacy</h3>
+                    <p>"Legacy" is a South African drama telenovela series on M-Net that follows the powerful Price family after the death of its patriarch, Sebastian Price, leading to a fierce power struggle<br>Production Design</p>
+                </div>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/_LK06UQ58PI" allowfullscreen></iframe>
+                <div class="video-info">
+                    <h3>Matilda</h3>
+                    <p>"Matilda & Matthys" is a 2024 South African romantic comedy film directed by Bibi Slippers. The story follows an ambitious writer and a tech entrepreneur who go on a series of fake dates for research purposes, only to find themselves entangled in the complexities of love.<br>Production Design</p>
+                </div>
+            </div>
+            <div class="video-item">
+                <iframe src="https://www.youtube.com/embed/-REVQPjFnwo" allowfullscreen></iframe>
+                <div class="video-info">
+                    <h3>Som van Twee</h3>
+                    <p>"Som van Twee" is a 2024 South African comedy-drama film directed by Simoné Pretorius. The story follows Henk Opperman, a psychologist dealing with the loss of his wife, as he struggles to reconnect with his son, Renier, amidst a series of unexpected events<br>Production Design</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu functionality
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuButton.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.header-content')) {
+                navLinks.classList.remove('show');
+            }
+        });
+
+        // URL parameter handling for video selection
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const videoUrl = urlParams.get('videourl');
+            const autoplay = urlParams.get('autoplay') === '1';
+            const mute = urlParams.get('mute') === '1';
+            
+            if (videoUrl) {
+                const mainVideo = document.getElementById('mainVideo');
+                let finalUrl = videoUrl;
+                
+                // Add parameters if they exist
+                if (autoplay || mute) {
+                    finalUrl += '?';
+                    if (autoplay) finalUrl += 'autoplay=1&';
+                    if (mute) finalUrl += 'mute=1&';
+                    finalUrl = finalUrl.replace(/&$/, ''); // Remove trailing &
+                }
+                
+                mainVideo.src = finalUrl;
+            }
+        });
+    </script>
+</body>
+</html>
