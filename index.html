@@ -114,6 +114,27 @@
                 padding: 0.8rem;
             }
         }
+
+
+        .gallery-wrapper {
+            overflow: hidden;
+            width: calc(4 * (200px + 2px));
+        }
+
+        .gallery-images {
+            display: flex;
+            transition: transform 0.3s ease;
+            transform: translateX(0);
+        }
+
+        /* Ensure all links remain white */
+        a {
+            color: white; /* Original color */
+            text-decoration: none; /* Remove underline */
+        }
+        a:visited {
+            color: rgb(180, 179, 179) !important; /* Keep visited links the same color */
+        }
     </style>
 </head>
 <body>
@@ -132,12 +153,99 @@
         </div>
     </header>
     <main>
-        <!-- Main content goes here -->
+      <!-- Video Section -->
+      <div class="video-section">
+        <div class="video-background">
+            <iframe src="https://www.youtube.com/embed/aNkwvUm4NHw?autoplay=1&mute=1&loop=1&playlist=aNkwvUm4NHw&controls=0&showinfo=0&modestbranding=1" 
+                    frameborder="0" 
+                    allow="autoplay" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+        
+      
+         
+            </div>
+
+    <!-- Scroller Section -->
+    <div class="gallery-container">
+        <button class="scroll-button left">&lt;</button>
+        <div class="gallery-wrapper">
+            <div class="gallery-images">
+                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs10.jpg" alt="Image10"></a>
+                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs11.jpg" alt="Image11"></a>
+                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs12.jpg" alt="Image12"></a>
+                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs13.jpg" alt="Image13"></a>
+                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs14.jpg" alt="Image14"></a>
+                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/7cNTUGDqhYk"><img src="./images/Dogs1.jpg" alt="Image14"></a>
+                <a href="ShowReel.html?videourl=https://www.youtube.com/embed/kPlJutvmdVc"><img src="./images/Ellen8.png" alt="Image2"></a>
+                <a href="ShowReel.html?videourl=https%3A%2F%2Fwww.youtube.com%2Fembed%2FZGsUbeByuzs&autoplay=1&mute=0"><img src="./images/Hartklop3.png" alt="Image3"></a>
+                <a href="ShowReel.html"><img src="./images/IamAllGirls5.png" alt="Image4"></a>
+                <a href="ShowReel.html"><img src="./images/iNumber7.png" alt="Image5"></a>
+                <a href="ShowReel.html"><img src="./images/Legacy4.jpg" alt="Image8"></a>
+                <a href="ShowReel.html"><img src="./images/Matilda6.png" alt="Image9"></a>
+                <a href="ShowReel.html"><img src="./images/SomvanTwee2.png" alt="Image10"></a>
+            </div>
+        </div>
+        <button class="scroll-button right">&gt;</button>
+    </div>        
+    
+        
+        
     </main>
     <footer>
         <p>&copy; 2025 Anneke Dempsey | <a href="https://www.instagram.com/annekedempsey">Instagram</a> | <a href="https://www.imdb.com/name/nm1234567/">IMDb</a></p>
     </footer>
     <script>
+
+<!-- JavaScript -->
+    
+       window.addEventListener("scroll", function() {
+           const overlay = document.querySelector(".overlay-text");
+           const gallery = document.querySelector(".gallery-container");
+           const galleryTop = gallery.getBoundingClientRect().top;
+
+           if (galleryTop <= 300) {
+               overlay.classList.add("hide-overlay");
+           } else {
+               overlay.classList.remove("hide-overlay");
+           }
+       });
+
+       const leftButton = document.querySelector('.left');
+       const rightButton = document.querySelector('.right');
+       const galleryImages = document.querySelector('.gallery-images');
+       const images = document.querySelectorAll('.gallery-images a');
+
+       const imageWidth = 200;
+       const gap = 2;
+       let currentPosition = 0;
+       const visibleImages = 4;
+
+       function updateButtons() {
+           leftButton.style.visibility = currentPosition === 0 ? 'hidden' : 'visible';
+           rightButton.style.visibility = 
+               currentPosition >= images.length - visibleImages ? 'hidden' : 'visible';
+       }
+
+       function scrollGallery(direction) {
+           const maxPosition = images.length - visibleImages;
+           currentPosition = Math.max(0, Math.min(maxPosition, currentPosition + direction));
+
+           galleryImages.style.transform = `translateX(-${currentPosition * (imageWidth + gap)}px)`;
+
+           updateButtons();
+       }
+
+       leftButton.addEventListener('click', () => scrollGallery(-1));
+       rightButton.addEventListener('click', () => scrollGallery(1));
+
+       updateButtons();
+    
+
+
+
+
         const mobileMenuButton = document.querySelector('.mobile-menu-button');
         const navLinks = document.querySelector('.nav-links');
 
