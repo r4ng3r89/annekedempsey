@@ -596,5 +596,23 @@
         animate();
 
     </script>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuButton.addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevent event bubbling
+            navLinks.classList.toggle('show');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.header-content')) {
+                navLinks.classList.remove('show');
+            }
+        });
+    </script>
 </body>
 </html>
