@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Interactive Cube Visualizer (Light)</title>
+    <style>
+        /* Basic Reset & Fullscreen Canvas */
+        body {
+            margin: 0;
+            overflow: hidden; /* Prevent scrollbars */
+            background-color: #f0f0f0; /* Light gray background */
+            font-family: sans-serif; /* Basic font for any text overlay */
+            color: #333; /* Default text color for light background */
+        }
+
+        canvas {
+            display: block; /* Remove potential space below canvas */
+        }
+
+        /* Simple loading/info text */
+        #info {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            text-align: center;
+            z-index: 100;
+            display:block;
+            color: #333333; /* Dark gray text for light background */
+            font-size: 12px;
+        }
+        #loading {
+             position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #333333; /* Dark gray text */
+            font-size: 20px;
+            z-index: 101;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">Hover over the cubes!</div>
+    <div id="loading">Loading Textures...</div>
+
+    <!-- The core of Three.js -->
+    <!-- Use a specific version for stability -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.161.0/build/three.module.js"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+
+        // --- Basic Setup ---
+        let scene, camera, renderer;
+        let raycaster, mouse;
+        const cubes = [];
+        let intersectedCube = null; // Track the currently hovered cube
+        const targetScale = 1.5; // How much to scale on hover
+        const normalScale = 1.0; // Normal scale
+        const lerpFactor = 0.1; // Smoothing factor for scaling animation
+
+        // --- Configuration ---
+        const cubeCount = 20; // <<< CHANGED: Reduced cube count
+        const sphereRadius = 6; // Slightly smaller radius might look better with fewer cubes
+        const baseCubeSize = 1; // Base size of each cube
+
+        // Simple texture cache to avoid reloading the same random image url multiple times
+        const textureCache = {};
+        const textureLoader = new THREE.TextureLoader();
+        let texturesLoaded = 0;
+        const totalTextures = cubeCount * 6; // Each cube needs 6 textures
+        const loadingDiv = document.getElementById('loading');
+        const infoDiv = document.getElementById('info');
+
+        function updateLoadingProgress() {
+            texturesLoaded++;
+            const progress = Math.round((texturesLoaded / totalTextures) * 100);
+             if (loadingDiv) {
+                // Make sure loadingDiv still exists
+                loadingDiv.textContent = `Loading Textures: ${progress}%`;
+            }
+            if (texturesLoaded >= totalTextures && loadingDiv && document.body.contains(loadingDiv)) {
+                // Use >= just in case. Check if it's still in the DOM before removing.
+                document.body.removeChild(loadingDiv); // Remove loading text when done
+                infoDiv.style.display = 'block'; // Show info text
+            }
+        }
+
+        function loadTexture(url) {
+            if (textureCache[url]) {
+                // Immediately count cached texture loads towards progress
+                updateLoadingProgress();
+                return textureCache[url];
+            }
+            const texture = textureLoader.load(
+                url,
+                updateLoadingProgress, // OnLoad callback
+                undefined, // onProgress (usually not needed per texture)
+                () => { // onError callback
+                    console.error(`Failed to load texture: ${url}. Using fallback.`);
+                    updateLoadingProgress(); // Still count it towards completion
+                }
+            );
+            texture.colorSpace = THREE.SRGBColorSpace; // Correct color display
+            textureCache[url] = texture;
+            return texture;
+        }
+
+        function init() {
+            // Scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xf0f0f0); // <<< CHANGED: Set scene background color
+            scene.fog = new THREE.FogExp2(0xf0f0f0, 0.06); // <<< CHANGED: Fog matches background, adjusted density slightly
+
+            // Camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 12; // Adjust camera distance if needed for fewer cubes
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            document.body.appendChild(renderer.domElement);
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xaaaaaa); // <<< CHANGED: Brighter ambient light
+            scene.add(ambientLight);
+
+            // Keep point lights, they add nice highlights
+            const pointLight1 = new THREE.PointLight(0xffffff, 0.8, 0); // Slightly reduce intensity if too bright
+            pointLight1.position.set(40, 40, 40);
+            scene.add(pointLight1);
+
+            const pointLight2 = new THREE.PointLight(0xffffff, 0.4, 0);
+            pointLight2.position.set(-40, -40, -40);
+            scene.add(pointLight2);
+
+            // Raycaster for mouse interaction
+            raycaster = new THREE.Raycaster();
+            mouse = new THREE.Vector2();
+
+            // --- Create Cubes ---
+            const geometry = new THREE.BoxGeometry(baseCubeSize, baseCubeSize, baseCubeSize);
+
+            for (let i = 0; i < cubeCount; i++) {
+                // Create unique materials for each cube with 6 different random images
+                const materials = [];
+                for (let j = 0; j < 6; j++) {
+                    const imageUrl = `https://picsum.photos/200/200?random=${i * 6 + j + Math.random()}`;
+                    const texture = loadTexture(imageUrl);
+                    const randomColor = new THREE.Color(Math.random() * 0.4 + 0.6, Math.random() * 0.4 + 0.6, Math.random() * 0.4 + 0.6); // Keep tints slightly bright
+
+                    materials.push(new THREE.MeshStandardMaterial({
+                        map: texture,
+                        color: randomColor,
+                        roughness: 0.7,
+                        metalness: 0.1
+                    }));
+                }
+
+                const cube = new THREE.Mesh(geometry, materials);
+
+                // Position cubes in a spherical layout
+                const phi = Math.acos(-1 + (2 * i) / cubeCount);
+                const theta = Math.sqrt(cubeCount * Math.PI) * phi;
+
+                cube.position.set(
+                    sphereRadius * Math.sin(phi) * Math.cos(theta),
+                    sphereRadius * Math.sin(phi) * Math.sin(theta),
+                    sphereRadius * Math.cos(phi)
+                );
+                cube.lookAt(scene.position);
+                cube.rotation.x += (Math.random() - 0.5) * Math.PI;
+                cube.rotation.y += (Math.random() - 0.5) * Math.PI;
+                cube.rotation.z += (Math.random() - 0.5) * Math.PI;
+                cube.scale.set(normalScale, normalScale, normalScale);
+                cube.userData.originalScale = new THREE.Vector3(normalScale, normalScale, normalScale);
+                cube.userData.targetScale = new THREE.Vector3(normalScale, normalScale, normalScale);
+
+                scene.add(cube);
+                cubes.push(cube);
+            }
+
+             // --- Background Particles ---
+            const particleCount = 3000; // Fewer particles might be sufficient now
+            const particlesGeometry = new THREE.BufferGeometry();
+            const positions = [];
+            // <<< CHANGED: Particle color to be visible on light background
+            const particleMaterial = new THREE.PointsMaterial({
+                color: 0x888888, // Darker gray for particles
+                size: 0.05,
+                transparent: true,
+                opacity: 0.6, // Slightly more opaque might help visibility
+                sizeAttenuation: true
+            });
+
+            for (let i = 0; i < particleCount; i++) {
+                const x = (Math.random() - 0.5) * 40; // Adjust spread if needed
+                const y = (Math.random() - 0.5) * 40;
+                const z = (Math.random() - 0.5) * 40;
+                positions.push(x, y, z);
+            }
+            particlesGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+            const particleSystem = new THREE.Points(particlesGeometry, particleMaterial);
+            scene.add(particleSystem);
+
+
+            // --- Event Listeners ---
+            window.addEventListener('resize', onWindowResize);
+            document.addEventListener('pointermove', onPointerMove); // Use pointermove
+
+            // Hide info initially, show loading
+            infoDiv.style.display = 'none';
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function onPointerMove(event) {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const time = Date.now() * 0.0001;
+
+            // --- Update Cube Rotations and Hover Effect ---
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(cubes);
+
+             if (intersectedCube && (!intersects.length || intersects[0].object !== intersectedCube)) {
+                intersectedCube.userData.targetScale.set(normalScale, normalScale, normalScale);
+                intersectedCube = null;
+            }
+
+            if (intersects.length > 0) {
+                if (intersectedCube !== intersects[0].object) {
+                     if(intersectedCube) {
+                         intersectedCube.userData.targetScale.set(normalScale, normalScale, normalScale);
+                     }
+                    intersectedCube = intersects[0].object;
+                    intersectedCube.userData.targetScale.set(targetScale, targetScale, targetScale);
+                }
+            }
+
+            // Animate all cubes: rotation + smooth scaling
+            cubes.forEach((cube, index) => {
+                cube.rotation.x += 0.001 + index * 0.00002; // Slightly adjusted speeds
+                cube.rotation.y += 0.002 + index * 0.00003;
+                cube.scale.lerp(cube.userData.targetScale, lerpFactor);
+            });
+
+            // --- Camera Animation ---
+            camera.position.x = Math.sin(time * 0.3) * 12; // Match Z position amplitude
+            camera.position.z = Math.cos(time * 0.3) * 12;
+            camera.lookAt(scene.position);
+
+            // Render the scene
+            renderer.render(scene, camera);
+        }
+
+        // --- Start ---
+        init();
+        animate();
+
+    </script>
+</body>
+</html>

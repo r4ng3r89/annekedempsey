@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Interactive Galaxy Cube Visualizer</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000000; /* Dark background */
+            font-family: sans-serif;
+            color: #ffffff; /* Light text */
+        }
+        canvas { display: block; }
+        #info {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            text-align: center;
+            z-index: 100;
+            display: block;
+            color: #ffffff; /* Light text */
+            font-size: 12px;
+        }
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 20px;
+            z-index: 101;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">Drag to rotate | Click cubes.</div>
+    <div id="loading">Loading Textures...</div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js'; // Import OrbitControls
+
+        // --- Configuration ---
+        // !!! EDIT THIS SECTION !!!
+        // Add your cube data here. Each object represents one cube.
+        // - images: An array of 6 image URLs (face order: +X, -X, +Y, -Y, +Z, -Z)
+        // - actionUrl: The webpage URL to open when clicked.
+        // - youtubeId: Alternatively, provide a YouTube video ID to open.
+        // Use placeholder images and URLs for now. Replace them with your actual data.
+        const cubeData = [
+            {
+                images: [ // Cube 1
+                    './images/Dogs1.jpg', './images/Dogs1.jpg',
+                    './images/Dogs1.jpg', './images/Dogs1.jpg',
+                    './images/Dogs1.jpg', './images/Dogs1.jpg'
+                ],
+                actionUrl: 'https://threejs.org/'
+            },
+            {
+                images: [ // Cube 2
+                    'https://picsum.photos/200/200?random=7', 'https://picsum.photos/200/200?random=8',
+                    'https://picsum.photos/200/200?random=9', 'https://picsum.photos/200/200?random=10',
+                    'https://picsum.photos/200/200?random=11', 'https://picsum.photos/200/200?random=12'
+                ],
+                youtubeId: 'dQw4w9WgXcQ' // Example YouTube ID
+            },
+            {
+                images: [ // Cube 3
+                    'https://picsum.photos/200/200?random=13', 'https://picsum.photos/200/200?random=14',
+                    'https://picsum.photos/200/200?random=15', 'https://picsum.photos/200/200?random=16',
+                    'https://picsum.photos/200/200?random=17', 'https://picsum.photos/200/200?random=18'
+                ],
+                actionUrl: 'https://developer.mozilla.org/'
+            },
+            // Add more cube objects here following the same pattern...
+             {
+                images: [
+                    'https://picsum.photos/200/200?random=19', 'https://picsum.photos/200/200?random=20',
+                    'https://picsum.photos/200/200?random=21', 'https://picsum.photos/200/200?random=22',
+                    'https://picsum.photos/200/200?random=23', 'https://picsum.photos/200/200?random=24'
+                ],
+                actionUrl: '#' // Placeholder link
+            },
+             {
+                images: [
+                    'https://picsum.photos/200/200?random=25', 'https://picsum.photos/200/200?random=26',
+                    'https://picsum.photos/200/200?random=27', 'https://picsum.photos/200/200?random=28',
+                    'https://picsum.photos/200/200?random=29', 'https://picsum.photos/200/200?random=30'
+                ],
+                 actionUrl: '#'
+            },
+            // Add up to 20 cube objects if desired
+             { images: ['https://picsum.photos/200/200?random=31','https://picsum.photos/200/200?random=32','https://picsum.photos/200/200?random=33','https://picsum.photos/200/200?random=34','https://picsum.photos/200/200?random=35','https://picsum.photos/200/200?random=36'], actionUrl: '#' },
+             { images: ['https://picsum.photos/200/200?random=37','https://picsum.photos/200/200?random=38','https://picsum.photos/200/200?random=39','https://picsum.photos/200/200?random=40','https://picsum.photos/200/200?random=41','https://picsum.photos/200/200?random=42'], youtubeId: 'L_LUpnjgPso' },
+             { images: ['https://picsum.photos/200/200?random=43','https://picsum.photos/200/200?random=44','https://picsum.photos/200/200?random=45','https://picsum.photos/200/200?random=46','https://picsum.photos/200/200?random=47','https://picsum.photos/200/200?random=48'], actionUrl: '#' },
+             { images: ['https://picsum.photos/200/200?random=49','https://picsum.photos/200/200?random=50','https://picsum.photos/200/200?random=51','https://picsum.photos/200/200?random=52','https://picsum.photos/200/200?random=53','https://picsum.photos/200/200?random=54'], actionUrl: '#' },
+             { images: ['https://picsum.photos/200/200?random=55','https://picsum.photos/200/200?random=56','https://picsum.photos/200/200?random=57','https://picsum.photos/200/200?random=58','https://picsum.photos/200/200?random=59','https://picsum.photos/200/200?random=60'], actionUrl: '#' },
+             { images: ['https://picsum.photos/200/200?random=61','https://picsum.photos/200/200?random=62','https://picsum.photos/200/200?random=63','https://picsum.photos/200/200?random=64','https://picsum.photos/200/200?random=65','https://picsum.photos/200/200?random=66'], actionUrl: '#' },
+             { images: ['https://picsum.photos/200/200?random=67','https://picsum.photos/200/200?random=68','https://picsum.photos/200/200?random=69','https://picsum.photos/200/200?random=70','https://picsum.photos/200/200?random=71','https://picsum.photos/200/200?random=72'], actionUrl: '#' },
+             { images: ['https://picsum.photos/200/200?random=73','https://picsum.photos/200/200?random=74','https://picsum.photos/200/200?random=75','https://picsum.photos/200/200?random=76','https://picsum.photos/200/200?random=77','https://picsum.photos/200/200?random=78'], actionUrl: '#' },
+             { images: ['https://picsum.photos/200/200?random=79','https://picsum.photos/200/200?random=80','https://picsum.photos/200/200?random=81','https://picsum.photos/200/200?random=82','https://picsum.photos/200/200?random=83','https://picsum.photos/200/200?random=84'], actionUrl: '#' },
+             { images: ['https://picsum.photos/200/200?random=85','https://picsum.photos/200/200?random=86','https://picsum.photos/200/200?random=87','https://picsum.photos/200/200?random=88','https://picsum.photos/200/200?random=89','https://picsum.photos/200/200?random=90'], actionUrl: '#' },
+             { images: ['https://picsum.photos/200/200?random=91','https://picsum.photos/200/200?random=92','https://picsum.photos/200/200?random=93','https://picsum.photos/200/200?random=94','https://picsum.photos/200/200?random=95','https://picsum.photos/200/200?random=96'], actionUrl: '#' },
+             { images: ['https://picsum.photos/200/200?random=97','https://picsum.photos/200/200?random=98','https://picsum.photos/200/200?random=99','https://picsum.photos/200/200?random=100','https://picsum.photos/200/200?random=101','https://picsum.photos/200/200?random=102'], actionUrl: '#' },
+             { images: ['https://picsum.photos/200/200?random=103','https://picsum.photos/200/200?random=104','https://picsum.photos/200/200?random=105','https://picsum.photos/200/200?random=106','https://picsum.photos/200/200?random=107','https://picsum.photos/200/200?random=108'], actionUrl: '#' },
+             { images: ['https://picsum.photos/200/200?random=109','https://picsum.photos/200/200?random=110','https://picsum.photos/200/200?random=111','https://picsum.photos/200/200?random=112','https://picsum.photos/200/200?random=113','https://picsum.photos/200/200?random=114'], actionUrl: '#' },
+             { images: ['https://picsum.photos/200/200?random=115','https://picsum.photos/200/200?random=116','https://picsum.photos/200/200?random=117','https://picsum.photos/200/200?random=118','https://picsum.photos/200/200?random=119','https://picsum.photos/200/200?random=120'], actionUrl: '#' },
+        ]; // Limited to 20 cubes as requested initially
+
+        const baseCubeSize = 1.5; // <<< CHANGED: Make cubes slightly bigger
+        const sphereRadius = 8;  // Adjusted radius for visual balance
+        const targetScale = 1.8; // How much to scale on hover (relative to base size)
+        const normalScale = 1.0; // Relative normal scale
+        const lerpFactor = 0.1;
+
+        // --- Basic Setup ---
+        let scene, camera, renderer, controls;
+        let raycaster, pointer; // Changed 'mouse' to 'pointer' for clarity with touch/mouse
+        const cubes = [];
+        let intersectedCube = null;
+        const textureCache = {};
+        const textureLoader = new THREE.TextureLoader();
+        let texturesLoaded = 0;
+        const totalTextures = cubeData.length * 6;
+        const loadingDiv = document.getElementById('loading');
+        const infoDiv = document.getElementById('info');
+        let pointerDownCoords = null; // To distinguish click from drag
+
+        function updateLoadingProgress() {
+            texturesLoaded++;
+            const progress = totalTextures > 0 ? Math.round((texturesLoaded / totalTextures) * 100) : 100;
+            if (loadingDiv) {
+                loadingDiv.textContent = `Loading Assets: ${progress}%`;
+            }
+            if (texturesLoaded >= totalTextures && loadingDiv && document.body.contains(loadingDiv)) {
+                 try { // Wrap in try/catch as element might be removed unexpectedly
+                    document.body.removeChild(loadingDiv);
+                } catch (e) { console.warn("Could not remove loadingDiv:", e); }
+                infoDiv.style.display = 'block';
+            }
+        }
+
+        function loadTexture(url, index) {
+             // Use a unique key combining URL and its index if needed, but URL is usually sufficient
+            const cacheKey = url;
+            if (textureCache[cacheKey]) {
+                updateLoadingProgress(); // Still count cached loads
+                return textureCache[cacheKey];
+            }
+
+            const texture = textureLoader.load(
+                url,
+                updateLoadingProgress, // onLoad
+                undefined, // onProgress
+                () => { // onError
+                    console.error(`Failed to load texture: ${url}. Cube index: ${Math.floor(index/6)}`);
+                    // Provide a fallback? Maybe a simple colored material side?
+                    // For now, just count it.
+                     updateLoadingProgress();
+                     // Optionally replace the material on error later
+                }
+            );
+            texture.colorSpace = THREE.SRGBColorSpace;
+            textureCache[cacheKey] = texture;
+            return texture;
+        }
+
+        function init() {
+            // Scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x000000); // Dark background
+            scene.fog = new THREE.FogExp2(0x000000, 0.04); // Dark fog, adjust density
+
+            // Camera
+            camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 15; // Start further back
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            document.body.appendChild(renderer.domElement);
+
+            // Controls (OrbitControls)
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true; // Smooths rotation
+            controls.dampingFactor = 0.05;
+            controls.enablePan = false; // Disable panning maybe?
+            controls.minDistance = 5; // Don't zoom in too close
+            controls.maxDistance = 50; // Don't zoom out too far
+            controls.autoRotate = false; // User controls rotation
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0x707070); // Slightly brighter ambient for dark bg
+            scene.add(ambientLight);
+            const pointLight1 = new THREE.PointLight(0xffffff, 1.5, 0, 1); // Brighter point light
+             pointLight1.position.set(50, 50, 50);
+             scene.add(pointLight1);
+            const pointLight2 = new THREE.PointLight(0xaaaaaa, 0.8, 0, 1); // Dimmer fill light
+             pointLight2.position.set(-50, -50, -50);
+             scene.add(pointLight2);
+
+
+            // Raycaster & Pointer Vector
+            raycaster = new THREE.Raycaster();
+            pointer = new THREE.Vector2();
+
+            // --- Create Cubes from cubeData ---
+            const geometry = new THREE.BoxGeometry(baseCubeSize, baseCubeSize, baseCubeSize);
+            const cubeCountActual = cubeData.length; // Use actual length of data
+
+            if (cubeCountActual === 0) {
+                 console.warn("cubeData array is empty. No cubes to display.");
+                 updateLoadingProgress(); // Trigger loading completion if no textures
+                 return; // Exit if no data
+            }
+
+
+            cubeData.forEach((data, i) => {
+                if (!data.images || data.images.length !== 6) {
+                    console.error(`Cube data at index ${i} is missing images or does not have exactly 6 images.`);
+                    // Skip this cube or create a fallback
+                     // Decrement totalTextures if skipping
+                    // For simplicity, we'll try to proceed but log error
+                    // Make sure texture loading counts reflect this skip if necessary
+                    return; // Skip this iteration
+                }
+
+                const materials = data.images.map((imgUrl, j) => {
+                    const texture = loadTexture(imgUrl, i*6 + j);
+                    // Make cubes slightly brighter/less rough
+                    return new THREE.MeshStandardMaterial({
+                        map: texture,
+                        color: 0xffffff, // Start with white, tint comes from texture mostly
+                        roughness: 0.5,  // <<< CHANGED: Less rough = shinier
+                        metalness: 0.1
+                    });
+                });
+
+                const cube = new THREE.Mesh(geometry, materials);
+
+                // Position cubes spherically
+                const phi = Math.acos(-1 + (2 * i) / cubeCountActual);
+                const theta = Math.sqrt(cubeCountActual * Math.PI) * phi;
+
+                cube.position.set(
+                    sphereRadius * Math.sin(phi) * Math.cos(theta),
+                    sphereRadius * Math.sin(phi) * Math.sin(theta),
+                    sphereRadius * Math.cos(phi)
+                );
+                cube.lookAt(scene.position); // Point towards center initially
+
+                 // Store action data and scale info
+                 cube.userData = {
+                    actionUrl: data.actionUrl,
+                    youtubeId: data.youtubeId,
+                    targetScale: new THREE.Vector3(normalScale, normalScale, normalScale),
+                    baseScaleFactor: baseCubeSize // Store the base size factor
+                };
+                // Set initial scale correctly based on baseCubeSize
+                cube.scale.set(baseCubeSize * normalScale, baseCubeSize * normalScale, baseCubeSize * normalScale);
+
+
+                scene.add(cube);
+                cubes.push(cube);
+            });
+
+
+            // --- Galaxy Starfield ---
+            const starCount = 10000; // More stars
+            const starGeometry = new THREE.BufferGeometry();
+            const positions = [];
+            const starMaterial = new THREE.PointsMaterial({
+                color: 0xffffff, // Bright white stars
+                size: 0.03,      // Smaller points
+                transparent: true,
+                opacity: 0.8,
+                sizeAttenuation: true
+            });
+
+            for (let i = 0; i < starCount; i++) {
+                // Distribute further out for a galaxy feel
+                const x = (Math.random() - 0.5) * 200;
+                const y = (Math.random() - 0.5) * 200;
+                const z = (Math.random() - 0.5) * 200;
+                // Avoid placing stars too close to the center where cubes are
+                 if (Math.sqrt(x*x + y*y + z*z) > sphereRadius * 2) {
+                    positions.push(x, y, z);
+                } else {
+                    // Regenerate if too close (simple approach)
+                    i--;
+                }
+
+            }
+            if (positions.length > 0) {
+                starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+                const starField = new THREE.Points(starGeometry, starMaterial);
+                scene.add(starField);
+            }
+
+
+            // --- Event Listeners ---
+            window.addEventListener('resize', onWindowResize);
+            // Use pointer events for better consistency
+            renderer.domElement.addEventListener('pointermove', onPointerMove);
+            renderer.domElement.addEventListener('pointerdown', onPointerDown);
+            renderer.domElement.addEventListener('pointerup', onPointerUp); // Use pointerup for click detection after drag ends
+
+            // Hide info, show loading
+            infoDiv.style.display = 'none';
+             if (totalTextures === 0) updateLoadingProgress(); // Handle case with no textures
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+         function updatePointer(event) {
+            // Calculate pointer position in normalized device coordinates (-1 to +1)
+            // Use offsetX/Y relative to the canvas to prevent issues with page scrolling/margins
+            const rect = renderer.domElement.getBoundingClientRect();
+            pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+         }
+
+        function onPointerMove(event) {
+             updatePointer(event); // Update pointer coordinates for raycasting
+
+            // Hover effect logic remains largely the same
+            raycaster.setFromCamera(pointer, camera);
+            const intersects = raycaster.intersectObjects(cubes);
+
+            // Scale down previously hovered cube if no longer hovered
+            if (intersectedCube && (!intersects.length || intersects[0].object !== intersectedCube)) {
+                intersectedCube.userData.targetScale.set(normalScale, normalScale, normalScale);
+                intersectedCube = null;
+            }
+
+            // Scale up newly hovered cube
+            if (intersects.length > 0) {
+                 const firstIntersect = intersects[0].object;
+                if (intersectedCube !== firstIntersect) {
+                    // If switching hover, reset the old one first
+                     if(intersectedCube) {
+                         intersectedCube.userData.targetScale.set(normalScale, normalScale, normalScale);
+                     }
+                    intersectedCube = firstIntersect;
+                    intersectedCube.userData.targetScale.set(targetScale, targetScale, targetScale);
+                }
+            }
+        }
+
+         // --- Click/Tap Handling ---
+        function onPointerDown(event) {
+            // Record pointer down coordinates to differentiate click from drag
+            pointerDownCoords = { x: event.clientX, y: event.clientY };
+        }
+
+        function onPointerUp(event) {
+            if (!pointerDownCoords) return; // Should not happen normally
+
+            const pointerUpCoords = { x: event.clientX, y: event.clientY };
+            const deltaX = Math.abs(pointerDownCoords.x - pointerUpCoords.x);
+            const deltaY = Math.abs(pointerDownCoords.y - pointerUpCoords.y);
+            const dragThreshold = 5; // Pixels threshold to consider it a drag
+
+            pointerDownCoords = null; // Reset for next interaction
+
+            // Only proceed if it wasn't a significant drag
+            if (deltaX < dragThreshold && deltaY < dragThreshold) {
+                handleClick(event);
+            }
+        }
+
+
+        function handleClick(event) {
+            // Make sure pointer coords are up-to-date for the click location
+             updatePointer(event);
+
+            raycaster.setFromCamera(pointer, camera);
+            const intersects = raycaster.intersectObjects(cubes);
+
+            if (intersects.length > 0) {
+                const clickedCube = intersects[0].object;
+                const userData = clickedCube.userData;
+
+                console.log("Clicked Cube UserData:", userData); // Debug log
+
+                if (userData.youtubeId) {
+                    const youtubeUrl = `https://www.youtube.com/watch?v=${userData.youtubeId}`;
+                    console.log("Opening YouTube:", youtubeUrl);
+                    window.open(youtubeUrl, '_blank'); // Open in new tab
+                } else if (userData.actionUrl && userData.actionUrl !== '#') { // Don't open empty hashes
+                     console.log("Opening URL:", userData.actionUrl);
+                    window.open(userData.actionUrl, '_blank'); // Open in new tab
+                } else {
+                     console.log("Clicked cube has no valid actionUrl or youtubeId.");
+                }
+            }
+        }
+
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Update controls (important for damping)
+            controls.update();
+
+            // Apply smooth scaling animation to cubes
+             cubes.forEach(cube => {
+                const scaleTarget = cube.userData.targetScale;
+                const baseSize = cube.userData.baseScaleFactor || 1; // Fallback to 1
+                // Interpolate the *relative* scale factor (1.0 or 1.5)
+                const currentRelativeScaleX = cube.scale.x / baseSize;
+                const newRelativeScaleX = THREE.MathUtils.lerp(currentRelativeScaleX, scaleTarget.x, lerpFactor);
+
+                // Apply the interpolated scale based on the base size
+                cube.scale.set(
+                     newRelativeScaleX * baseSize,
+                     newRelativeScaleX * baseSize, // Assuming uniform scaling target
+                     newRelativeScaleX * baseSize
+                );
+
+                // Optional: Add subtle individual rotation if desired (can conflict with user control feel)
+                 // cube.rotation.x += 0.0005;
+                 // cube.rotation.y += 0.001;
+            });
+
+
+            // Render the scene
+            renderer.render(scene, camera);
+        }
+
+        // --- Start ---
+        init();
+        animate();
+
+    </script>
+</body>
+</html>
