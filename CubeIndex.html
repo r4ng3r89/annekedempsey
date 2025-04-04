@@ -35,7 +35,7 @@
     </style>
 </head>
 <body>
-    <div id="info">Drag to rotate | Click cubes..</div>
+    <div id="info">Drag to rotate | Click cubes...</div>
     <div id="loading">Loading Textures...</div>
 
     <script type="importmap">
@@ -190,7 +190,7 @@
             // Scene
             scene = new THREE.Scene();
             scene.background = new THREE.Color(0x000000); // Dark background
-            scene.fog = new THREE.FogExp2(0x000000, 0.00); // Dark fog, adjust density
+            scene.fog = new THREE.FogExp2(0x000000, 0.005); // Reduced fog density for less effect
 
             // Camera
             camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
