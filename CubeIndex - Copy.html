@@ -65,7 +65,7 @@
                     './images/Dogs1.jpg', './images/Dogs1.jpg',
                     './images/Dogs1.jpg', './images/Dogs1.jpg'
                 ],
-                actionUrl: 'https://threejs.org/'
+                actionUrl: 'https://www.youtube.com/watch?v=7cNTUGDqhYk' // Dogs
             },
             {
                 images: [ // Cube 2
@@ -73,7 +73,7 @@
                     './images/Ellen8.png', './images/Ellen8.png',
                     './images/Ellen8.png', './images/Ellen8.png'
                 ],
-                youtubeId: 'dQw4w9WgXcQ' // Example YouTube ID
+                actionUrl: 'https://www.youtube.com/watch?v=kPlJutvmdVc' // Ellen
             },
             {
                 images: [ // Cube 3
@@ -81,33 +81,31 @@
                     './images/Hartklop3.png', './images/Hartklop3.png',
                     './images/Hartklop3.png', './images/Hartklop3.png'
                 ],
-                actionUrl: 'https://developer.mozilla.org/'
+                actionUrl: 'https://www.youtube.com/watch?v=ZGsUbeByuzs' // Hartklop
             },
-            // Add more cube objects here following the same pattern...
-             {
+            {
                 images: [
                     './images/IamAllGirls5.png', './images/IamAllGirls5.png',
                     './images/IamAllGirls5.png', './images/IamAllGirls5.png',
                     './images/IamAllGirls5.png', './images/IamAllGirls5.png'
                 ],
-                actionUrl: '#' // Placeholder link
+                actionUrl: 'https://www.youtube.com/watch?v=zMPS9JO0p6w' // I am All Girls
             },
-             {
+            {
                 images: [
                     './images/iNumber7.png', './images/iNumber7.png',
                     './images/iNumber7.png', './images/iNumber7.png',
                     './images/iNumber7.png', './images/iNumber7.png'
                 ],
-                 actionUrl: '#'
+                actionUrl: 'https://www.youtube.com/watch?v=hSWhMglY4Kk' // iNumber
             },
-            // Add up to 20 cube objects if desired
             {
                 images: [
                     './images/Legacy4.jpg', './images/Legacy4.jpg',
                     './images/Legacy4.jpg', './images/Legacy4.jpg',
                     './images/Legacy4.jpg', './images/Legacy4.jpg'
                 ],
-                 actionUrl: '#'
+                actionUrl: 'https://www.youtube.com/watch?v=8W2nSg4wS84' // Legacy
             },
             {
                 images: [
@@ -115,7 +113,7 @@
                     './images/Matilda6.png', './images/Matilda6.png',
                     './images/Matilda6.png', './images/Matilda6.png'
                 ],
-                 actionUrl: '#'
+                actionUrl: 'https://www.youtube.com/watch?v=_LK06UQ58PI' // Matilda
             },
             {
                 images: [
@@ -123,15 +121,24 @@
                     './images/SomvanTwee2.png', './images/SomvanTwee2.png',
                     './images/SomvanTwee2.png', './images/SomvanTwee2.png'
                 ],
-                 actionUrl: '#'
+                actionUrl: 'https://www.youtube.com/watch?v=-REVQPjFnwo' // Som van Twee
             },
+            {
+                images: [
+                    './images/WorkHistory.jpg', './images/WorkHistory.jpg',
+                    './images/WorkHistory.jpg', './images/WorkHistory.jpg',
+                    './images/WorkHistory.jpg', './images/WorkHistory.jpg'
+                ],
+                actionUrl: 'https://annekedempsey.pages.dev/work-history.html' // Work History
+            },
+            // Add more cube objects here following the same pattern...
             {
                 images: [
                     './AD.jpg', './AD.jpg',
                     './AD.jpg', './AD.jpg',
                     './AD.jpg', './AD.jpg'
                 ],
-                 actionUrl: 'https://annekedempsey.pages.dev/contact.html'
+                actionUrl: 'https://annekedempsey.pages.dev/contact.html'
             },
             {
                 images: [
@@ -139,10 +146,9 @@
                     './images/ShowReel.jpg', './images/ShowReel.jpg',
                     './images/ShowReel.jpg', './images/ShowReel.jpg'
                 ],
-                 actionUrl: 'https://annekedempsey.pages.dev/ShowReel.html'
+                actionUrl: 'https://annekedempsey.pages.dev/ShowReel.html'
             },
-
-       ]; // Limited to 20 cubes as requested initially
+        ]; // Limited to 20 cubes as requested initially
 
         const baseCubeSize = 1.5; // <<< CHANGED: Make cubes slightly bigger
         const sphereRadius = 8;  // Adjusted radius for visual balance
@@ -294,7 +300,6 @@
                  // Store action data and scale info
                  cube.userData = {
                     actionUrl: data.actionUrl,
-                    youtubeId: data.youtubeId,
                     targetScale: new THREE.Vector3(normalScale, normalScale, normalScale),
                     baseScaleFactor: baseCubeSize // Store the base size factor
                 };
@@ -429,15 +434,11 @@
 
                 console.log("Clicked Cube UserData:", userData); // Debug log
 
-                if (userData.youtubeId) {
-                    const youtubeUrl = `https://www.youtube.com/watch?v=${userData.youtubeId}`;
-                    console.log("Opening YouTube:", youtubeUrl);
-                    window.open(youtubeUrl, '_blank'); // Open in new tab
-                } else if (userData.actionUrl && userData.actionUrl !== '#') { // Don't open empty hashes
+                if (userData.actionUrl && userData.actionUrl !== '#') { // Don't open empty hashes
                      console.log("Opening URL:", userData.actionUrl);
                     window.open(userData.actionUrl, '_blank'); // Open in new tab
                 } else {
-                     console.log("Clicked cube has no valid actionUrl or youtubeId.");
+                     console.log("Clicked cube has no valid actionUrl.");
                 }
             }
         }
