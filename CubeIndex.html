@@ -126,15 +126,7 @@
                  actionUrl: '#'
             },
 
-            { images: ['https://picsum.photos/200/200?random=73','https://picsum.photos/200/200?random=74','https://picsum.photos/200/200?random=75','https://picsum.photos/200/200?random=76','https://picsum.photos/200/200?random=77','https://picsum.photos/200/200?random=78'], actionUrl: '#' },
-             { images: ['https://picsum.photos/200/200?random=79','https://picsum.photos/200/200?random=80','https://picsum.photos/200/200?random=81','https://picsum.photos/200/200?random=82','https://picsum.photos/200/200?random=83','https://picsum.photos/200/200?random=84'], actionUrl: '#' },
-             { images: ['https://picsum.photos/200/200?random=85','https://picsum.photos/200/200?random=86','https://picsum.photos/200/200?random=87','https://picsum.photos/200/200?random=88','https://picsum.photos/200/200?random=89','https://picsum.photos/200/200?random=90'], actionUrl: '#' },
-             { images: ['https://picsum.photos/200/200?random=91','https://picsum.photos/200/200?random=92','https://picsum.photos/200/200?random=93','https://picsum.photos/200/200?random=94','https://picsum.photos/200/200?random=95','https://picsum.photos/200/200?random=96'], actionUrl: '#' },
-             { images: ['https://picsum.photos/200/200?random=97','https://picsum.photos/200/200?random=98','https://picsum.photos/200/200?random=99','https://picsum.photos/200/200?random=100','https://picsum.photos/200/200?random=101','https://picsum.photos/200/200?random=102'], actionUrl: '#' },
-             { images: ['https://picsum.photos/200/200?random=103','https://picsum.photos/200/200?random=104','https://picsum.photos/200/200?random=105','https://picsum.photos/200/200?random=106','https://picsum.photos/200/200?random=107','https://picsum.photos/200/200?random=108'], actionUrl: '#' },
-             { images: ['https://picsum.photos/200/200?random=109','https://picsum.photos/200/200?random=110','https://picsum.photos/200/200?random=111','https://picsum.photos/200/200?random=112','https://picsum.photos/200/200?random=113','https://picsum.photos/200/200?random=114'], actionUrl: '#' },
-             { images: ['https://picsum.photos/200/200?random=115','https://picsum.photos/200/200?random=116','https://picsum.photos/200/200?random=117','https://picsum.photos/200/200?random=118','https://picsum.photos/200/200?random=119','https://picsum.photos/200/200?random=120'], actionUrl: '#' },
-        ]; // Limited to 20 cubes as requested initially
+       ]; // Limited to 20 cubes as requested initially
 
         const baseCubeSize = 1.5; // <<< CHANGED: Make cubes slightly bigger
         const sphereRadius = 8;  // Adjusted radius for visual balance
@@ -198,7 +190,7 @@
             // Scene
             scene = new THREE.Scene();
             scene.background = new THREE.Color(0x000000); // Dark background
-            scene.fog = new THREE.FogExp2(0x000000, 0.01); // Dark fog, adjust density
+            scene.fog = new THREE.FogExp2(0x000000, 0.00); // Dark fog, adjust density
 
             // Camera
             camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
