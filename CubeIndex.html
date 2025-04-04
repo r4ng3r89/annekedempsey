@@ -35,7 +35,7 @@
     </style>
 </head>
 <body>
-    <div id="info">Drag to rotate | Click cubes.2</div>
+    <div id="info">Drag to rotate | Click cubes.3</div>
     <div id="loading">Loading Textures...</div>
 
     <script type="importmap">
@@ -212,17 +212,17 @@
             controls.autoRotate = false; // User controls rotation
 
             // Lighting
-            const ambientLight = new THREE.AmbientLight(0xb0b0b0); // Even brighter ambient light
+            const ambientLight = new THREE.AmbientLight(0xd0d0d0); // Further brighten ambient light
             scene.add(ambientLight);
-            const pointLight1 = new THREE.PointLight(0xffffff, 2.5, 0, 1); // Further increase intensity
+            const pointLight1 = new THREE.PointLight(0xffffff, 3.0, 0, 1); // Further increase intensity
              pointLight1.position.set(50, 50, 50);
              scene.add(pointLight1);
-            const pointLight2 = new THREE.PointLight(0xaaaaaa, 1.5, 0, 1); // Further increase intensity
+            const pointLight2 = new THREE.PointLight(0xaaaaaa, 2.0, 0, 1); // Further increase intensity
              pointLight2.position.set(-50, -50, -50);
              scene.add(pointLight2);
 
-            // Add an additional light source
-            const pointLight3 = new THREE.PointLight(0xffffff, 1.0, 0, 1);
+            // Adjust additional light source
+            const pointLight3 = new THREE.PointLight(0xffffff, 1.5, 0, 1);
             pointLight3.position.set(0, 50, 0);
             scene.add(pointLight3);
 
