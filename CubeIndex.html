@@ -35,7 +35,7 @@
     </style>
 </head>
 <body>
-    <div id="info">Drag to rotate | Click cubes...</div>
+    <div id="info">Drag to rotate | Click cubes.</div>
     <div id="loading">Loading Textures...</div>
 
     <script type="importmap">
@@ -212,12 +212,12 @@
             controls.autoRotate = false; // User controls rotation
 
             // Lighting
-            const ambientLight = new THREE.AmbientLight(0x707070); // Slightly brighter ambient for dark bg
+            const ambientLight = new THREE.AmbientLight(0x909090); // Brighter ambient light
             scene.add(ambientLight);
-            const pointLight1 = new THREE.PointLight(0xffffff, 1.5, 0, 1); // Brighter point light
+            const pointLight1 = new THREE.PointLight(0xffffff, 2.0, 0, 1); // Increase intensity
              pointLight1.position.set(50, 50, 50);
              scene.add(pointLight1);
-            const pointLight2 = new THREE.PointLight(0xaaaaaa, 0.8, 0, 1); // Dimmer fill light
+            const pointLight2 = new THREE.PointLight(0xaaaaaa, 1.0, 0, 1); // Increase intensity
              pointLight2.position.set(-50, -50, -50);
              scene.add(pointLight2);
 
@@ -249,12 +249,12 @@
 
                 const materials = data.images.map((imgUrl, j) => {
                     const texture = loadTexture(imgUrl, i*6 + j);
-                    // Make cubes slightly brighter/less rough
+                    // Adjust material properties
                     return new THREE.MeshStandardMaterial({
                         map: texture,
-                        color: 0xffffff, // Start with white, tint comes from texture mostly
-                        roughness: 0.5,  // <<< CHANGED: Less rough = shinier
-                        metalness: 0.1
+                        color: 0xffffff, // Ensure base color is white
+                        roughness: 0.3,  // Less rough for shinier appearance
+                        metalness: 0.2   // Slightly more metallic
                     });
                 });
 
