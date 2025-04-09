@@ -3,106 +3,16 @@
 <head>
     <title>JLW Plumbing - Quick Emergency Service</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
-            color: #333;
-            overflow-x: hidden;
-        }
-
-        .hero {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 90%;
-            max-width: 1000px;
-            margin: 50px auto;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .hero img {
-            max-width: 40%;
-            height: auto;
-            margin-right: 20px;
-            border-radius: 8px;
-        }
-
-        form {
-            text-align: left;
-            flex: 1;
-        }
-
-        form label {
-            display: block;
-            margin-bottom: 5px;
-            color: #007bff;
-        }
-
-        form input, form textarea {
-            width: calc(100% - 12px);
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        form button {
-            background-color: #007bff;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        form button:hover {
-            background-color: #0056b3;
-        }
-
-        .testimonials, .achievements {
-            width: 90%;
-            max-width: 1000px;
-            margin: 50px auto;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .testimonial {
-            margin-bottom: 20px;
-        }
-
-        .achievement {
-            margin-bottom: 20px;
-        }
-
-        @media (max-width: 800px) {
-            .hero {
-                flex-direction: column;
-            }
-
-            .hero img {
-                max-width: 80%;
-                margin-right: 0;
-                margin-bottom: 20px;
-            }
-        }
+        /* ... (Your existing CSS styles) ... */
     </style>
 </head>
 <body>
     <div class="hero">
         <img src="plumbing_image.jpg" alt="Plumbing Emergency">
         <div>
-            <h1>Need Immediate Plumbing Help?</h1>
+            <h1>Need Immediate Plumbing Help??</h1>
             <p>Don't let leaks and clogs disrupt your day. Get fast, reliable service now!</p>
-            <form id="emergencyForm">
+            <form id="emergencyForm" action="send_email.php" method="post">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
                 <label for="phone">Phone:</label>
@@ -115,35 +25,9 @@
     </div>
 
     <div class="testimonials">
-        <h2>What Our Customers Say</h2>
-        <div class="testimonial">
-            <p>"Cobus arrived quickly and fixed our burst pipe in no time. Highly recommend!"</p>
-            <p>- Sarah J.</p>
         </div>
-        <div class="testimonial">
-            <p>"Professional, efficient, and friendly service. JLW Plumbing is the best!"</p>
-            <p>- Michael T.</p>
-        </div>
-    </div>
 
     <div class="achievements">
-        <h2>Cobus's Plumbing Achievements</h2>
-        <div class="achievement">
-            <p>Certified Master Plumber with over 15 years of experience.</p>
         </div>
-        <div class="achievement">
-            <p>Successfully resolved over 1000 emergency plumbing issues.</p>
-        </div>
-        <div class="achievement">
-            <p>Awarded "Plumber of the Year" in 2022 for outstanding service.</p>
-        </div>
-    </div>
-
-    <script>
-        document.getElementById('emergencyForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            alert('Your service request has been submitted! We will contact you shortly.');
-        });
-    </script>
 </body>
 </html>
