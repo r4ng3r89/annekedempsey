@@ -4,6 +4,44 @@
     <title>JLW Plumbing - Quick Emergency Service</title>
     <style>
         /* ... (Your existing CSS styles) ... */
+
+        /* Responsive styles for hero section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .hero form {
+            width: 100%;
+            max-width: 500px;
+            margin-top: 20px;
+        }
+
+        .hero input, .hero textarea, .hero button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+
+            .hero div {
+                max-width: 50%;
+            }
+        }
     </style>
 </head>
 <body>
